@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>शुभारंभ Admin Panel</title>
+<link rel="icon" href="Shop%20logo.jpeg" type="image/jpeg">
+<link rel="apple-touch-icon" href="Shop%20logo.jpeg">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--g:#1B6B2A;--gd:#0F4A1C;--gp:#E9F5EC;--m:#F59E0B;--ml:#FDE68A;--k:#9B1B30;--d:#1C1917;--t:#44403C;--gr:#78716C;--l:#F5F0EB;--w:#fff;--r:14px}
+body{font-family:'Outfit','Noto Sans Devanagari',sans-serif;background:#F7F5F2;color:var(--d);display:flex;min-height:100vh}
+.side{width:240px;background:var(--d);color:var(--w);padding:1.5rem 1rem;position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:50;overflow-y:auto}
+.side .logo{display:flex;align-items:center;gap:.5rem;margin-bottom:2rem}.side .logo b{font-size:1rem}.side .logo small{display:block;font-size:.55rem;color:rgba(255,255,255,.4)}
+.side h6{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.25);margin:1rem 0 .5rem .5rem}
+.si{display:flex;align-items:center;gap:.5rem;padding:.6rem .7rem;border-radius:10px;color:rgba(255,255,255,.5);font-size:.8rem;font-weight:500;cursor:pointer;transition:.2s;margin-bottom:2px}
+.si:hover,.si.on{background:rgba(255,255,255,.07);color:var(--w)}.si.on{background:var(--g)}
+.side-foot{margin-top:auto;border-top:1px solid rgba(255,255,255,.06);padding-top:1rem}
+.side-foot a{display:flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.4);font-size:.75rem;text-decoration:none;padding:.4rem .5rem;border-radius:8px;transition:.2s}.side-foot a:hover{color:var(--w)}
+.main{margin-left:240px;flex:1;padding:1.5rem 2rem}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem}
+.topbar h1{font-size:1.3rem;font-weight:800}.topbar p{font-size:.75rem;color:var(--gr)}
+.btn{display:inline-flex;align-items:center;gap:.3rem;padding:.55rem 1.1rem;border-radius:10px;font-size:.78rem;font-weight:600;border:none;cursor:pointer;transition:.2s;font-family:inherit}
+.btn-p{background:var(--g);color:var(--w)}.btn-p:hover{transform:translateY(-1px)}
+.btn-o{background:var(--w);color:var(--d);border:1.5px solid var(--l)}.btn-o:hover{border-color:var(--g);color:var(--g)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.sc{background:var(--w);border-radius:var(--r);padding:1.2rem;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.sc .ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.7rem}
+.sc h3{font-size:1.4rem;font-weight:800}.sc p{font-size:.68rem;color:var(--gr)}
+.card{background:var(--w);border-radius:var(--r);box-shadow:0 2px 12px rgba(0,0,0,.04);overflow:hidden;margin-bottom:1.2rem}
+.card-h{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.2rem;border-bottom:1px solid var(--l)}
+.card-h h2{font-size:.95rem;font-weight:700}
+.fbtns{display:flex;gap:.3rem;flex-wrap:wrap}
+.fb{padding:.3rem .7rem;border-radius:50px;border:1.5px solid var(--l);background:var(--w);font-size:.65rem;font-weight:600;cursor:pointer;transition:.2s;font-family:inherit;color:var(--t)}
+.fb:hover,.fb.on{background:var(--g);color:var(--w);border-color:var(--g)}
+.sbar{display:flex;align-items:center;gap:.4rem;background:#F7F5F2;border-radius:8px;padding:.4rem .7rem;margin:.6rem 1rem}
+.sbar input{border:none;background:none;outline:none;flex:1;font-family:inherit;font-size:.78rem}
+table{width:100%;border-collapse:collapse}
+thead{background:#F7F5F2}
+th{text-align:left;padding:.5rem 1rem;font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--gr);font-weight:600}
+td{padding:.5rem 1rem;border-top:1px solid #F5F0EB;font-size:.8rem;vertical-align:middle}
+.tp{display:flex;align-items:center;gap:.7rem}
+.tp img{width:44px;height:44px;border-radius:10px;object-fit:cover;border:1px solid var(--l)}
+.tp .ni{width:44px;height:44px;border-radius:10px;background:var(--l);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.tp h4{font-weight:600;font-size:.82rem}.tp span{font-size:.65rem;color:var(--gr)}
+.tg{display:inline-block;padding:.15rem .5rem;border-radius:50px;font-size:.58rem;font-weight:600}
+.ib{width:28px;height:28px;border-radius:7px;border:1.5px solid var(--l);background:var(--w);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:.2s}
+.ib:hover{border-color:var(--g);color:var(--g)}.ib.dl:hover{border-color:#DC2626;color:#DC2626}
+.empty{text-align:center;padding:3rem;color:var(--gr)}.empty span{font-size:2rem;display:block;margin-bottom:.5rem}
+.mo{position:fixed;inset:0;background:rgba(0,0,0,.35);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:1rem}
+.mo.show{display:flex}
+.mod{background:var(--w);border-radius:18px;width:100%;max-width:520px;max-height:88vh;overflow-y:auto;box-shadow:0 20px 50px rgba(0,0,0,.12);animation:mIn .2s ease}
+@keyframes mIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.mod-h{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.3rem;border-bottom:1px solid var(--l)}
+.mod-h h2{font-size:1rem;font-weight:800}
+.mod-x{width:30px;height:30px;border-radius:8px;border:none;background:#F3F4F6;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center}.mod-x:hover{background:#FEE2E2;color:#DC2626}
+.mod-b{padding:1.3rem}
+.fg{margin-bottom:1rem}.fg label{display:block;font-size:.73rem;font-weight:600;margin-bottom:.3rem;color:var(--t)}.fg label em{color:var(--k);font-style:normal}
+.fi{width:100%;padding:.6rem .8rem;border:1.5px solid var(--l);border-radius:10px;font-size:.82rem;font-family:inherit;transition:border .2s;color:var(--d)}
+.fi:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 2px rgba(27,107,42,.08)}
+select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2378716C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .7rem center;padding-right:2rem}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.iu{border:2px dashed var(--l);border-radius:12px;padding:1.2rem;text-align:center;cursor:pointer;transition:.2s;position:relative;overflow:hidden}
+.iu:hover{border-color:var(--g);background:var(--gp)}
+.iu input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.iu p{font-size:.7rem;color:var(--gr)}.iu b{color:var(--g)}
+.ip{width:100%;max-height:140px;object-fit:cover;border-radius:8px;margin-top:.6rem;display:none;border:1px solid var(--l)}
+.urlt{text-align:center;margin:.5rem 0;font-size:.68rem;color:var(--gr)}.urlt a{color:var(--g);cursor:pointer;font-weight:600}
+.mod-f{padding:.7rem 1.3rem 1rem;display:flex;gap:.5rem;justify-content:flex-end}
+.sp{background:var(--w);border-radius:var(--r);padding:1.3rem;box-shadow:0 2px 12px rgba(0,0,0,.04);margin-bottom:1rem}
+.sp h3{font-size:.88rem;font-weight:700;margin-bottom:1rem}
+.sr{display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--l)}.sr:last-child{border:none}
+.sr h4{font-size:.8rem;font-weight:600}.sr p{font-size:.68rem;color:var(--gr)}
+.tog{width:38px;height:20px;border-radius:10px;background:var(--l);position:relative;cursor:pointer;transition:.3s}
+.tog.on{background:var(--g)}.tog::after{content:'';position:absolute;width:14px;height:14px;border-radius:50%;background:var(--w);top:3px;left:3px;transition:.3s;box-shadow:0 1px 2px rgba(0,0,0,.1)}.tog.on::after{transform:translateX(18px)}
+.tpill{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .6rem;border-radius:50px;font-size:.7rem;font-weight:600;border:1.5px solid var(--l);margin:.2rem}
+.tpill .tc{width:8px;height:8px;border-radius:50%}
+.tpill button{background:none;border:none;color:var(--gr);cursor:pointer;font-size:.65rem}.tpill button:hover{color:#DC2626}
+.infobox{background:#F7F5F2;border-radius:10px;padding:1rem;margin-bottom:1rem;border-left:3px solid var(--g);font-size:.78rem;line-height:1.6;color:var(--t)}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--d);color:var(--w);padding:.7rem 1rem;border-radius:10px;font-size:.78rem;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.15);transform:translateY(70px);opacity:0;transition:.3s;z-index:300}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:800px){.side{display:none}.main{margin-left:0}.stats{grid-template-columns:1fr 1fr}.fr{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<aside class="side">
+  <div class="logo">🏪 <div><b>शुभारंभ</b><small>Admin Dashboard</small></div></div>
+  <h6>व्यवस्थापन</h6>
+  <div class="si on" onclick="view('prod',this)">📦 प्रॉडक्ट्स</div>
+  <div class="si" onclick="view('tags',this)">🏷️ टॅग्स</div>
+  <div class="si" onclick="view('cats',this)">📂 श्रेण्या</div>
+  <div class="si" onclick="view('content',this)">📝 मजकूर</div>
+  <div class="si" onclick="view('settings',this)">⚙️ सेटिंग्ज</div>
+  <h6>Actions</h6>
+  <div class="si" onclick="openMod()">➕ नवीन प्रॉडक्ट</div>
+  <div class="si" onclick="exp()">📤 Export</div>
+  <div class="si" onclick="expSite()">🌐 site-data.json</div>
+  <div class="si" onclick="document.getElementById('impF').click()">📥 Import</div>
+  <div class="side-foot"><a href="index.html" target="_blank">🌐 वेबसाईट पहा</a><p style="font-size:.65rem;color:rgba(255,255,255,.35);margin-top:.75rem;line-height:1.45">वेबसाईट व Admin एकाच पत्त्यावर उघडा (उदा. <code style="opacity:.8">localhost:8000</code>). वेगळा पोर्ट/फाइल मार्ग असल्यास ब्राउझरमध्ये डेटा शेअर होत नाही.</p></div>
+</aside>
+<div class="main">
+  <div class="topbar"><div><h1 id="vt">प्रॉडक्ट व्यवस्थापन</h1><p id="vd">सर्व प्रॉडक्ट्स व्यवस्थापित करा</p></div><div style="display:flex;gap:.5rem"><button class="btn btn-o" onclick="exp()">📤</button><button class="btn btn-p" onclick="openMod()">➕ नवीन प्रॉडक्ट</button></div></div>
+  <div id="V_prod">
+    <div class="stats"><div class="sc"><div class="ico" style="background:var(--gp)">📦</div><h3 id="s1">0</h3><p>एकूण</p></div><div class="sc"><div class="ico" style="background:var(--ml)">🆕</div><h3 id="s2">0</h3><p>नवीन</p></div><div class="sc"><div class="ico" style="background:#FEF3C7">✦</div><h3 id="s3">0</h3><p>विशेष</p></div><div class="sc"><div class="ico" style="background:#FCE7F3">⚡</div><h3 id="s4">0</h3><p>ऑफर</p></div></div>
+    <div class="card"><div class="card-h"><h2>सर्व प्रॉडक्ट्स</h2><div class="fbtns" id="tFilt"></div></div><div class="sbar"><span>🔍</span><input placeholder="शोधा..." id="sIn" oninput="rT()"></div><div id="tB"></div></div>
+  </div>
+  <div id="V_tags" style="display:none"><div class="sp"><h3>🏷️ टॅग्स व्यवस्थापन</h3><div class="infobox"><b>"नवीन"</b> टॅग लावलेले प्रॉडक्ट्स वेबसाईटवर "नवीन आलेले" स्लायडरमध्ये दिसतात!</div><div id="tagL" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem"></div><div style="display:flex;gap:.5rem"><input class="fi" id="ntN" placeholder="टॅग नाव" style="flex:1"><input class="fi" id="ntC" value="#1B6B2A" style="width:80px"><button class="btn btn-p" onclick="addTag()">जोडा</button></div></div></div>
+  <div id="V_cats" style="display:none"><div class="sp"><h3>📂 श्रेण्या</h3><div id="catL"></div><div style="display:flex;gap:.5rem;margin-top:1rem"><input class="fi" id="ncN" placeholder="मराठी नाव" style="flex:1"><input class="fi" id="ncE" placeholder="English" style="flex:1"><input class="fi" id="ncI" placeholder="Emoji" style="width:55px" value="📦"><button class="btn btn-p" onclick="addCat()">जोडा</button></div></div></div>
+  <div id="V_content" style="display:none"><div class="sp"><h3>📝 मराठी</h3><div class="fg"><label>हीरो शीर्षक</label><input class="fi" id="c_hm" value="तुमच्या गावचे विश्वासू दुकान"></div><div class="fg"><label>वर्णन</label><textarea class="fi" id="c_dm" rows="2">किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, फरसाण, सणाच्या वस्तू, लोणचे, सुकामेवा, कोकणातील उत्पादने — सर्व एकाच ठिकाणी.</textarea></div><div class="fg"><label>आमच्याबद्दल</label><textarea class="fi" id="c_am" rows="2">शुभारंभ स्टोअर्सची स्थापना 2024 साली श्री. रविंद्र अणेराव व श्रीमती रूपम अणेराव यांनी केली.</textarea></div></div><div class="sp"><h3>📝 English</h3><div class="fg"><label>Hero Title</label><input class="fi" id="c_he" value="Your Trusted Village Store"></div><div class="fg"><label>Description</label><textarea class="fi" id="c_de" rows="2">Groceries, cold drinks, ice cream, snacks, farsan, festival items, pickles, dry fruits & Konkan products — all under one roof.</textarea></div><div class="fg"><label>About</label><textarea class="fi" id="c_ae" rows="2">Established in 2024 by Mr. Ravindra Anerao and Mrs. Rupam Anerao.</textarea></div></div><button class="btn btn-p" onclick="saveCo()">💾 सेव्ह</button></div>
+  <div id="V_settings" style="display:none"><div class="sp"><h3>🏪 दुकान माहिती</h3><div class="fg"><label>नाव (मराठी)</label><input class="fi" id="s_nm" value="शुभारंभ स्टोअर्स"></div><div class="fg"><label>Name (En)</label><input class="fi" id="s_ne" value="Shubharambh Stores"></div><div class="fr"><div class="fg"><label>WhatsApp</label><input class="fi" id="s_wa" value="918208674432"></div><div class="fg"><label>Phone</label><input class="fi" id="s_ph" value="+91 8208674432"></div></div><div class="fr"><div class="fg"><label>पत्ता (मराठी)</label><input class="fi" id="s_adm" value="तुमचे गाव, कोकण"></div><div class="fg"><label>Address</label><input class="fi" id="s_ade" value="Your Village, Konkan"></div></div><div class="fg"><label>वेळ</label><input class="fi" id="s_ti" value="सकाळी ८ ते रात्री १०"></div><button class="btn btn-p" onclick="saveSet()">💾 सेव्ह</button></div><div class="sp"><h3>🎨 Display</h3><div class="sr"><div><h4>किंमत दाखवा</h4></div><div class="tog on" id="t_pr" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>"नवीन" स्लायडर</h4></div><div class="tog on" id="t_nw" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>कोकण सेक्शन</h4></div><div class="tog on" id="t_ko" onclick="this.classList.toggle('on')"></div></div></div></div>
+</div>
+<div class="mo" id="modal"><div class="mod"><div class="mod-h"><h2 id="mT">नवीन प्रॉडक्ट</h2><button class="mod-x" onclick="closeMod()">✕</button></div><div class="mod-b"><input type="hidden" id="eId"><div class="fg"><label>फोटो</label><div class="iu" id="iuA">📷<br><p><b>अपलोड करा</b> (2MB)</p><input type="file" accept="image/*" id="iF" onchange="hImg(event)"></div><img class="ip" id="iPr"><div class="urlt">किंवा <a onclick="tgIm()">URL paste करा</a></div><div id="iuF" style="display:none"><input class="fi" id="iUrl" placeholder="https://..." oninput="pUrl()"></div></div><div class="fg"><label>नाव (मराठी) <em>*</em></label><input class="fi" id="pN" placeholder="कोकम आगळ"></div><div class="fg"><label>Name (English)</label><input class="fi" id="pNe" placeholder="Kokam Agal"></div><div class="fr"><div class="fg"><label>श्रेणी</label><select class="fi" id="pC"></select></div><div class="fg"><label>टॅग</label><select class="fi" id="pT"></select></div></div><div class="fr"><div class="fg"><label>Selling ₹ <small style="color:var(--gr)">(विक्री किंमत)</small></label><input class="fi" id="pP" type="number" placeholder="जी किंमत आकारता"></div><div class="fg"><label>Original ₹ <small style="color:var(--gr)">(MRP)</small></label><input class="fi" id="pO" type="number" placeholder="मूळ / MRP किंमत"></div></div><div class="fg" style="display:flex;align-items:center;gap:.5rem;background:#FFFBEB;padding:.6rem .8rem;border-radius:8px;border:1.5px solid #FDE68A"><input type="checkbox" id="pU" style="width:16px;height:16px;accent-color:#F59E0B;flex-shrink:0"><label style="font-size:.8rem;font-weight:600;cursor:pointer;line-height:1.3" for="pU">✦ विशेष / Unique Item <small style="color:var(--gr);font-weight:400;display:block">दुर्मिळ, खास किंवा एकमेव वस्तू — वेगळ्या पद्धतीने दाखवली जाते</small></label></div><div class="fg"><label>वर्णन (मराठी)</label><input class="fi" id="pD"></div><div class="fg"><label>Desc (En)</label><input class="fi" id="pDe"></div></div><div class="mod-f"><button class="btn btn-o" onclick="closeMod()">रद्द</button><button class="btn btn-p" onclick="saveP()">💾 सेव्ह</button></div></div></div>
+<div class="toast" id="tst"></div>
+<input type="file" id="impF" accept=".json" style="display:none" onchange="imp(event)">
+<script>
+const K={p:'shubharambh_products',s:'shubharambh_settings',c:'shubharambh_categories',t:'shubharambh_tags',co:'shubharambh_content'};
+const DC=[{id:'snacks',n:'स्नॅक्स व फरसाण',e:'Snacks & Farsan',i:'🍘'},{id:'drinks',n:'थंड पेये व आइस्क्रीम',e:'Drinks & Ice Cream',i:'🥤'},{id:'konkan',n:'कोकण स्पेशल',e:'Konkan Special',i:'🌿'},{id:'festival',n:'सण-उत्सव',e:'Festival Items',i:'🎉'},{id:'daily',n:'दैनंदिन वस्तू',e:'Daily Essentials',i:'🛒'}];
+const DT=[{id:'new',n:'नवीन',e:'New',c:'#9B1B30'},{id:'best',n:'बेस्टसेलर',e:'Bestseller',c:'#F59E0B'},{id:'popular',n:'लोकप्रिय',e:'Popular',c:'#1B6B2A'},{id:'offer',n:'ऑफर',e:'Offer',c:'#DC2626'},{id:'homemade',n:'घरगुती',e:'Homemade',c:'#0F4A1C'}];
+const g=k=>JSON.parse(localStorage.getItem(k)||'null');const sv=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const gP=()=>g(K.p)||[];const gS=()=>g(K.s)||{};const gC=()=>g(K.c)||DC;const gT=()=>g(K.t)||DT;const gCo=()=>g(K.co)||{};
+function view(v,el){document.querySelectorAll('.si').forEach(x=>x.classList.remove('on'));el?.classList.add('on');['prod','tags','cats','content','settings'].forEach(x=>{const e=document.getElementById('V_'+x);if(e)e.style.display=x===v?'':'none'});const m={prod:['प्रॉडक्ट व्यवस्थापन','सर्व प्रॉडक्ट्स व्यवस्थापित करा'],tags:['टॅग्स','बॅज व्यवस्थापन'],cats:['श्रेण्या','श्रेणी व्यवस्थापन'],content:['मजकूर','वेबसाईट मजकूर'],settings:['सेटिंग्ज','दुकान सेटिंग्ज']};document.getElementById('vt').textContent=m[v]?.[0]||'';document.getElementById('vd').textContent=m[v]?.[1]||'';if(v==='prod'){rT();uS()}if(v==='tags')rTags();if(v==='cats')rCats();if(v==='content')lCo();if(v==='settings')lSet()}
+function uS(){const p=gP();document.getElementById('s1').textContent=p.length;document.getElementById('s2').textContent=p.filter(x=>x.tag==='new').length;document.getElementById('s3').textContent=p.filter(x=>x.iu||x.isUnique).length;document.getElementById('s4').textContent=p.filter(x=>x.tag==='offer').length}
+let fil='all';
+function mkPrCell(p){/* Admin price display: same logic as frontend */const sell=p.pr!==''&&p.pr!=null?parseFloat(p.pr):NaN;const orig=p.op!==''&&p.op!=null?parseFloat(p.op):NaN;const hasSell=!isNaN(sell)&&sell>0;const hasOrig=!isNaN(orig)&&orig>0;if(!hasSell&&!hasOrig)return'—';if(hasOrig&&hasSell){if(orig>sell){const pct=Math.round((orig-sell)/orig*100);return'<span style="font-weight:700;color:var(--g)">₹'+sell+'</span> <s style="color:var(--gr);font-size:.7em">₹'+orig+'</s> <span style="background:#DC2626;color:#fff;font-size:.55rem;padding:.1rem .3rem;border-radius:4px">'+pct+'%</span>'}return'<span style="font-weight:700">₹'+orig+'</span>'}return'<span style="font-weight:700">₹'+(hasOrig?orig:sell)+'</span>'}
+function rT(){const cs=gC(),ts=gT(),q=document.getElementById('sIn').value.toLowerCase();const fE=document.getElementById('tFilt');fE.innerHTML='<button class="fb '+(fil==='all'?'on':'')+'" onclick="fil=\'all\';rT()">सर्व</button><button class="fb '+(fil==='__new'?'on':'')+'" onclick="fil=\'__new\';rT()">🆕 नवीन</button><button class="fb '+(fil==='__unique'?'on':'')+'" onclick="fil=\'__unique\';rT()" style="'+(fil==='__unique'?'':'')+'">✦ विशेष</button>';cs.forEach(c=>fE.innerHTML+='<button class="fb '+(fil===c.id?'on':'')+'" onclick="fil=\''+c.id+'\';rT()">'+c.i+' '+c.n+'</button>');let ps=gP();/* Sort newest first */ps.sort((a,b)=>new Date(b.ca||b.addedAt||0)-new Date(a.ca||a.addedAt||0));if(fil==='__new')ps=ps.filter(p=>p.tag==='new');else if(fil==='__unique')ps=ps.filter(p=>p.iu||p.isUnique);else if(fil!=='all')ps=ps.filter(p=>p.cat===fil);if(q)ps=ps.filter(p=>((p.n||'')+(p.ne||'')+(p.d||'')).toLowerCase().includes(q));const b=document.getElementById('tB');if(!ps.length){b.innerHTML='<div class="empty"><span>📦</span>प्रॉडक्ट नाही</div>';return}const cm=Object.fromEntries(cs.map(c=>[c.id,c])),tm=Object.fromEntries(ts.map(t=>[t.id,t]));const tc={snacks:'#FEF3C7/#92400E',drinks:'#DBEAFE/#1E40AF',konkan:'#E9F5EC/#1B6B2A',festival:'#EDE9FE/#6D28D9',daily:'#F3F4F6/#374151'};let h='<table><thead><tr><th>प्रॉडक्ट</th><th>श्रेणी</th><th>किंमत</th><th>टॅग</th><th></th></tr></thead><tbody>';ps.forEach(p=>{const img=p.img?'<img src="'+p.img+'">':`<div class="ni">📷</div>`;const ct=cm[p.cat];const tg=tm[p.tag];const[bg,fg]=(tc[p.cat]||'#F3F4F6/#374151').split('/');const uqBadge=(p.iu||p.isUnique)?'<span style="background:#FDE68A;color:#78350F;font-size:.55rem;font-weight:700;padding:.1rem .3rem;border-radius:4px;margin-left:.25rem">✦ विशेष</span>':'';h+='<tr style="'+(p.iu||p.isUnique?'background:#FFFBEB':'')+'" ><td><div class="tp">'+img+'<div><h4>'+p.n+uqBadge+'</h4><span>'+(p.ne||p.d||'')+'</span></div></div></td><td><span class="tg" style="background:'+bg+';color:'+fg+'">'+(ct?.n||p.cat)+'</span></td><td>'+mkPrCell(p)+'</td><td>'+(tg?'<span class="tg" style="background:'+tg.c+'18;color:'+tg.c+'">'+tg.n+'</span>':'—')+'</td><td><div style="display:flex;gap:.2rem"><button class="ib" onclick="editP(\''+p.id+'\')">✏️</button><button class="ib dl" onclick="delP(\''+p.id+'\')">🗑️</button></div></td></tr>'});b.innerHTML=h+'</tbody></table>'}
+let im='up';function openMod(){document.getElementById('modal').classList.add('show');document.getElementById('eId').value='';document.getElementById('mT').textContent='नवीन प्रॉडक्ट';['pN','pNe','pP','pO','pD','pDe','iUrl'].forEach(x=>document.getElementById(x).value='');document.getElementById('iPr').style.display='none';document.getElementById('pU').checked=false;im='up';document.getElementById('iuF').style.display='none';document.getElementById('iuA').style.display='';const cs=gC(),ts=gT();document.getElementById('pC').innerHTML=cs.map(c=>'<option value="'+c.id+'">'+c.i+' '+c.n+'</option>').join('');document.getElementById('pT').innerHTML='<option value="">—</option>'+ts.map(t=>'<option value="'+t.id+'">'+t.n+'</option>').join('')}
+function closeMod(){document.getElementById('modal').classList.remove('show')}
+function editP(id){const p=gP().find(x=>x.id===id);if(!p)return;openMod();document.getElementById('mT').textContent='बदला';document.getElementById('eId').value=id;document.getElementById('pN').value=p.n||'';document.getElementById('pNe').value=p.ne||'';document.getElementById('pC').value=p.cat||'snacks';document.getElementById('pT').value=p.tag||'';document.getElementById('pP').value=p.pr||'';document.getElementById('pO').value=p.op||'';document.getElementById('pU').checked=!!(p.iu||p.isUnique);document.getElementById('pD').value=p.d||'';document.getElementById('pDe').value=p.de||'';if(p.img){document.getElementById('iPr').src=p.img;document.getElementById('iPr').style.display='block';if(p.img.startsWith('http')){im='url';document.getElementById('iuF').style.display='';document.getElementById('iuA').style.display='none';document.getElementById('iUrl').value=p.img}}}
+function tgIm(){if(im==='up'){im='url';document.getElementById('iuF').style.display='';document.getElementById('iuA').style.display='none';document.querySelector('.urlt a').textContent='फाइल अपलोड'}else{im='up';document.getElementById('iuF').style.display='none';document.getElementById('iuA').style.display='';document.querySelector('.urlt a').textContent='URL paste करा'}}
+function hImg(e){const f=e.target.files[0];if(!f)return;if(f.size>2e6){toast('2MB!','e');return}const r=new FileReader();r.onload=v=>{document.getElementById('iPr').src=v.target.result;document.getElementById('iPr').style.display='block'};r.readAsDataURL(f)}
+function pUrl(){const u=document.getElementById('iUrl').value;if(u){document.getElementById('iPr').src=u;document.getElementById('iPr').style.display='block'}}
+function saveP(){const n=document.getElementById('pN').value.trim();if(!n){toast('नाव लिहा!','e');return}const eid=document.getElementById('eId').value;let img='';if(im==='url')img=document.getElementById('iUrl').value.trim();else{const p=document.getElementById('iPr');if(p.style.display!=='none')img=p.src}const prod={id:eid||'p'+Date.now(),n,ne:document.getElementById('pNe').value.trim(),cat:document.getElementById('pC').value,tag:document.getElementById('pT').value,pr:document.getElementById('pP').value,op:document.getElementById('pO').value,iu:document.getElementById('pU').checked||undefined,d:document.getElementById('pD').value.trim(),de:document.getElementById('pDe').value.trim(),img,ca:eid?undefined:new Date().toISOString()};const ps=gP();if(eid){const i=ps.findIndex(p=>p.id===eid);if(i>=0){prod.ca=ps[i].ca;ps[i]=prod}}else ps.unshift(prod);sv(K.p,ps);closeMod();rT();uS();toast(eid?'अपडेट!':'जोडले!','s')}
+function delP(id){if(!confirm('डिलीट?'))return;sv(K.p,gP().filter(p=>p.id!==id));rT();uS();toast('डिलीट!','s')}
+function rTags(){document.getElementById('tagL').innerHTML=gT().map((t,i)=>'<div class="tpill"><span class="tc" style="background:'+t.c+'"></span>'+t.n+' <button onclick="rmTag('+i+')">✕</button></div>').join('')}
+function addTag(){const n=document.getElementById('ntN').value.trim();if(!n)return;const ts=gT();ts.push({id:n.replace(/\s+/g,'_').toLowerCase(),n,e:n,c:document.getElementById('ntC').value||'#1B6B2A'});sv(K.t,ts);document.getElementById('ntN').value='';rTags();toast('जोडला!','s')}
+function rmTag(i){const t=gT();t.splice(i,1);sv(K.t,t);rTags()}
+function rCats(){document.getElementById('catL').innerHTML=gC().map((c,i)=>'<div class="sr"><div style="display:flex;align-items:center;gap:.6rem"><span style="font-size:1.2rem">'+c.i+'</span><div><h4>'+c.n+'</h4><p>'+c.e+'</p></div></div><button class="ib dl" onclick="rmCat('+i+')">🗑️</button></div>').join('')}
+function addCat(){const n=document.getElementById('ncN').value.trim();if(!n)return;const cs=gC();cs.push({id:n.replace(/\s+/g,'_').toLowerCase(),n,e:document.getElementById('ncE').value.trim()||n,i:document.getElementById('ncI').value.trim()||'📦'});sv(K.c,cs);document.getElementById('ncN').value='';document.getElementById('ncE').value='';rCats();toast('जोडली!','s')}
+function rmCat(i){const c=gC();c.splice(i,1);sv(K.c,c);rCats()}
+function lCo(){const co=gCo();['c_hm','c_dm','c_am','c_he','c_de','c_ae'].forEach(k=>{if(co[k])document.getElementById(k).value=co[k]})}
+function saveCo(){const co={};['c_hm','c_dm','c_am','c_he','c_de','c_ae'].forEach(k=>co[k]=document.getElementById(k).value);sv(K.co,co);toast('सेव्ह!','s')}
+function lSet(){const st=gS();if(st.nm)document.getElementById('s_nm').value=st.nm;if(st.ne)document.getElementById('s_ne').value=st.ne;if(st.wa)document.getElementById('s_wa').value=st.wa;if(st.ph)document.getElementById('s_ph').value=st.ph;if(st.adm)document.getElementById('s_adm').value=st.adm;if(st.ade)document.getElementById('s_ade').value=st.ade;if(st.ti)document.getElementById('s_ti').value=st.ti;if(st.sp===false)document.getElementById('t_pr').classList.remove('on');if(st.sn===false)document.getElementById('t_nw').classList.remove('on');if(st.sk===false)document.getElementById('t_ko').classList.remove('on')}
+function saveSet(){sv(K.s,{nm:document.getElementById('s_nm').value,ne:document.getElementById('s_ne').value,wa:document.getElementById('s_wa').value,ph:document.getElementById('s_ph').value,adm:document.getElementById('s_adm').value,ade:document.getElementById('s_ade').value,ti:document.getElementById('s_ti').value,sp:document.getElementById('t_pr').classList.contains('on'),sn:document.getElementById('t_nw').classList.contains('on'),sk:document.getElementById('t_ko').classList.contains('on')});toast('सेव्ह!','s')}
+function exp(){const d={_forceSync:true,products:gP(),settings:gS(),categories:gC(),tags:gT(),content:gCo()};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='shubharambh_'+new Date().toISOString().split('T')[0]+'.json';a.click();toast('Exported!','s')}
+function expSite(){const d={_forceSync:true,products:gP(),settings:gS(),categories:gC(),tags:gT(),content:gCo()};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='site-data.json';a.click();toast('site-data.json — project folder मध्ये ठेवा व होस्टवर पुश/अपलोड करा','s')}
+function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=v=>{try{const d=JSON.parse(v.target.result);if(d.products)sv(K.p,d.products);if(d.settings)sv(K.s,d.settings);if(d.categories)sv(K.c,d.categories);if(d.tags)sv(K.t,d.tags);if(d.content)sv(K.co,d.content);rT();uS();toast('Imported!','s')}catch(e){toast('Error!','e')}};r.readAsText(f);e.target.value=''}
+function toast(m,t){const e=document.getElementById('tst');e.textContent=(t==='s'?'✅ ':'❌ ')+m;e.className='toast show';setTimeout(()=>e.classList.remove('show'),2500)}
+rT();uS();
+</script>
+</body>
+</html>

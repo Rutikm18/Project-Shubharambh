@@ -1,0 +1,9 @@
+# Netlify: drag this folder or connect Git — Build: leave empty, Publish: .
+[build]
+  publish = "."
+  command = "true"
+
+[[headers]]
+  for = "/site-data.json"
+  [headers.values]
+    Cache-Control = "public, max-age=120, must-revalidate"
