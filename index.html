@@ -454,17 +454,40 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 600px ─────────────── */
 @media(max-width:600px){
-  .pbanner>img{height:210px}
-  .pbanner-ov{background:linear-gradient(0deg,rgba(15,74,28,.95) 0%,rgba(15,74,28,.7) 55%,rgba(15,74,28,.15) 100%);align-items:flex-end;padding:0}
-  .pbanner-inner{flex-direction:column;align-items:stretch;gap:0;padding:.9rem 1rem}
-  .pb-pills{position:static;margin-bottom:.55rem}
-  .pb-pill{font-size:.65rem;padding:.22rem .55rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}
+  /* Product banner: more image area + readable overlay (was short fixed height) */
+  .pbanner{margin-left:-5%;margin-right:-5%;width:calc(100% + 10%);border-radius:16px}
+  .pbanner>img{
+    height:auto;
+    min-height:210px;
+    max-height:min(58vw,280px);
+    aspect-ratio:16/10;
+    object-fit:cover;
+    object-position:center 38%;
+  }
+  .pbanner-ov{
+    background:linear-gradient(180deg,rgba(15,74,28,.12) 0%,rgba(15,74,28,.35) 38%,rgba(15,74,28,.88) 72%,rgba(10,50,22,.97) 100%);
+    align-items:flex-end;
+    padding:0;
+  }
+  .pbanner-inner{flex-direction:column;align-items:stretch;gap:0;padding:.85rem 1rem max(.95rem,env(safe-area-inset-bottom,0px))}
+  .pb-pills{position:static;display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.5rem}
+  .pb-pill{font-size:.64rem;padding:.2rem .52rem;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
   .pb-pill strong{font-size:.72rem}
-  .pbanner-badge{margin-bottom:.3rem}
-  .pbanner-txt{margin-bottom:.6rem}
-  .pbanner-txt h3{font-size:1.05rem;margin-bottom:.2rem}
-  .pbanner-txt p{max-width:100%;font-size:.78rem;line-height:1.45}
-  .pbanner-cta{align-self:flex-start;padding:.5rem 1.1rem;font-size:.78rem}
+  .pbanner-badge{margin-bottom:.28rem}
+  .pbanner-txt{margin-bottom:.55rem}
+  .pbanner-txt h3{font-size:clamp(1rem,4.2vw,1.12rem);margin-bottom:.2rem;line-height:1.22}
+  .pbanner-txt p{max-width:100%;font-size:.8rem;line-height:1.5;color:rgba(255,255,255,.78)}
+  .pbanner-cta{
+    align-self:stretch;
+    justify-content:center;
+    width:100%;
+    min-height:44px;
+    padding:.58rem 1rem;
+    font-size:.8rem;
+    white-space:normal;
+    text-align:center;
+    line-height:1.25;
+  }
   .pb-deco,.pb-deco2{display:none}
   .ptabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 5% .6rem;margin:0 -5% 1.4rem;gap:.42rem;scrollbar-width:none;-ms-overflow-style:none}
   .ptabs::-webkit-scrollbar{display:none}
@@ -508,19 +531,24 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .cc h4{font-size:.78rem;line-height:1.08}
   .nsec{padding:2.6rem 4.5%}
   .pc{min-width:146px}
-  .pbanner{border-radius:13px;margin-bottom:1.3rem}
-  .pbanner>img{height:185px}
+  .pbanner{border-radius:14px;margin-left:-4.5%;margin-right:-4.5%;width:calc(100% + 9%);margin-bottom:1.35rem}
+  .pbanner>img{
+    min-height:200px;
+    max-height:min(62vw,260px);
+    aspect-ratio:4/3;
+    object-position:center 36%;
+  }
   .pbanner-ov{padding:0}
-  .pbanner-inner{padding:.7rem .8rem}
-  .pbanner-txt h3{font-size:.92rem;margin-bottom:.15rem}
-  .pbanner-txt p{font-size:.72rem;line-height:1.4}
-  .pbanner-badge{font-size:.6rem;padding:.16rem .48rem;margin-bottom:.25rem}
+  .pbanner-inner{padding:.65rem .85rem max(.75rem,env(safe-area-inset-bottom,0px))}
+  .pbanner-txt h3{font-size:.95rem;margin-bottom:.12rem}
+  .pbanner-txt p{font-size:.74rem;line-height:1.48}
+  .pbanner-badge{font-size:.58rem;padding:.14rem .46rem;margin-bottom:.22rem}
   .pbanner-badge .pb-dot{width:5px;height:5px}
-  .pbanner-cta{padding:.42rem .9rem;font-size:.72rem;gap:.22rem}
-  .pbanner-cta svg{width:12px;height:12px}
-  .pb-pills{margin-bottom:.4rem;gap:.28rem}
-  .pb-pill{font-size:.6rem;padding:.16rem .42rem}
-  .pb-pill strong{font-size:.66rem}
+  .pbanner-cta{padding:.52rem .85rem;font-size:.76rem;gap:.28rem;min-height:46px}
+  .pbanner-cta svg{width:13px;height:13px;flex-shrink:0}
+  .pb-pills{margin-bottom:.38rem;gap:.28rem}
+  .pb-pill{font-size:.58rem;padding:.14rem .4rem}
+  .pb-pill strong{font-size:.64rem}
   .kb{margin:0 3.5%;padding:1.4rem 1rem;border-radius:15px}
   .kbt h2{font-size:1.15rem}
   .ki{gap:.32rem}
@@ -564,6 +592,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .mm-acts a:active{transform:scale(.95)!important;opacity:.88}
   .cc:hover,.wc:hover,.bb:hover,.ostat:hover{transform:none!important;box-shadow:var(--sh)!important}
   .pbanner-cta:active{transform:scale(.95)!important;transition:transform .1s!important}
+  .pbanner:hover>img{transform:none}
 }</style>
 </head>
 <body>
