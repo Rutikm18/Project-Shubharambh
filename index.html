@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0F4A1C">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>शुभारंभ स्टोअर्स — तुमच्या गावचे विश्वासू दुकान</title>
+<title>शुभारंभ स्टोअर्स — आपल्या गावातील हक्काचं आणि विश्वासाचं ठिकाण</title>
 <link rel="icon" href="Shop%20logo.jpeg" type="image/jpeg">
 <link rel="apple-touch-icon" href="Shop%20logo.jpeg">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -189,12 +189,29 @@ nav:not(.sc) .ham span{background:white}
 .pg .pc{min-width:auto}
 .ep{text-align:center;padding:3rem;color:var(--gr)}
 
-/* Products banner */
-.pbanner{position:relative;overflow:hidden;border-radius:20px;margin:0 0 2.2rem;min-height:200px}
-.pbanner img{width:100%;height:300px;object-fit:cover;display:block}
-.pbanner-ov{position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,74,28,.88) 0%,rgba(15,74,28,.45) 55%,transparent 100%);display:flex;align-items:center;padding:2rem 2.8rem}
-.pbanner-txt h3{color:white;font-size:clamp(1.1rem,2.3vw,1.65rem);font-weight:800;margin-bottom:.4rem}
-.pbanner-txt p{color:rgba(255,255,255,.72);font-size:.9rem;max-width:270px;line-height:1.65}
+/* ═══ Products Banner — Enhanced D2C ═══ */
+.pbanner{position:relative;overflow:hidden;border-radius:20px;margin:0 0 2.2rem}
+.pbanner>img{width:100%;height:260px;object-fit:cover;object-position:center;display:block;transition:transform 5s cubic-bezier(.25,.46,.45,.94);filter:brightness(.88) saturate(1.1)}
+.pbanner:hover>img{transform:scale(1.06)}
+.pbanner-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,74,28,.9) 0%,rgba(15,74,28,.62) 45%,rgba(155,27,48,.3) 100%);display:flex;align-items:flex-end;padding:1.6rem 2rem}
+.pbanner-inner{display:flex;align-items:flex-end;justify-content:space-between;width:100%;gap:1rem}
+.pbanner-txt{min-width:0;flex:1}
+.pbanner-badge{display:inline-flex;align-items:center;gap:.3rem;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:50px;padding:.22rem .65rem;color:var(--ml);font-size:.7rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.5rem}
+.pbanner-badge .pb-dot{width:6px;height:6px;background:#4ade80;border-radius:50%;animation:bk 1.8s ease-in-out infinite}
+.pbanner-txt h3{color:white;font-size:clamp(1.15rem,2.5vw,1.7rem);font-weight:800;margin-bottom:.3rem;line-height:1.2}
+.pbanner-txt h3 .pb-hl{color:var(--ml)}
+.pbanner-txt p{color:rgba(255,255,255,.68);font-size:.86rem;max-width:340px;line-height:1.6}
+.pb-pills{position:absolute;top:.9rem;left:1rem;display:flex;gap:.4rem;z-index:3}
+.pb-pill{display:flex;align-items:center;gap:.25rem;background:rgba(0,0,0,.38);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:.24rem .6rem;color:#fff;font-size:.68rem;font-weight:600}
+.pb-pill strong{color:var(--ml);font-size:.76rem}
+.pbanner-cta{display:inline-flex;align-items:center;gap:.35rem;background:linear-gradient(135deg,#FBBF24,#F59E0B);color:var(--d);padding:.55rem 1.2rem;border-radius:50px;font-size:.8rem;font-weight:700;border:none;cursor:pointer;white-space:nowrap;box-shadow:0 4px 16px rgba(245,158,11,.32);transition:all .3s;flex-shrink:0;text-decoration:none;font-family:inherit}
+.pbanner-cta:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 8px 24px rgba(245,158,11,.45)}
+.pbanner-cta svg{transition:transform .3s}
+.pbanner-cta:hover svg{transform:translateX(3px)}
+.pb-deco{position:absolute;top:10%;right:4%;width:75px;height:75px;border:2px dashed rgba(253,230,138,.18);border-radius:50%;animation:pbspin 22s linear infinite;pointer-events:none}
+.pb-deco2{position:absolute;top:18%;right:8%;width:28px;height:28px;background:radial-gradient(circle,rgba(245,158,11,.18),transparent 70%);border-radius:50%;animation:pbpulse 3.5s ease-in-out infinite;pointer-events:none}
+@keyframes pbspin{to{transform:rotate(360deg)}}
+@keyframes pbpulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.3)}}
 
 /* Konkan */
 .kb{background:var(--gd);padding:3rem;border-radius:24px;margin:0 5%;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(15,74,28,.18)}
@@ -312,7 +329,6 @@ footer{background:var(--d);color:var(--w);padding:3rem 5% 1.2rem}
 .hero-flex{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;max-width:1160px;position:relative;z-index:3}
 .hero-flex>.hero-content{max-width:680px;text-align:center;margin:0 auto}
 .hero-flex .hbtns,.hero-flex .htrust,.hero-flex .hb{justify-content:center}
-/* After rH() updates title, keep hero text visible (innerHTML can invalidate CSS animations) */
 .hero.hero-ui-ready .h-logo,.hero.hero-ui-ready .hb,.hero.hero-ui-ready h1,.hero.hero-ui-ready .hsub,.hero.hero-ui-ready .hbtns,.hero.hero-ui-ready .htrust,.hero.hero-ui-ready .scroll-hint{opacity:1!important;animation:none!important}
 
 /* 3D Product Card Tilt */
@@ -372,7 +388,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 .ptab:hover:not(.ac){transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.08)}
 .ptab.ac{transform:translateY(-1px)}
 
-/* Section reveal — always readable (no hidden-until-scroll) */
+/* Section reveal */
 .rv{opacity:1;transform:none;transition:opacity .5s ease,transform .5s ease}
 .rv.vis{opacity:1;transform:none}
 .rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
@@ -428,13 +444,28 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .owner-stats{grid-template-columns:repeat(3,1fr)}
   .ft{grid-template-columns:1fr 1fr}
   .fbot{flex-direction:column;gap:.2rem;text-align:center}
-  .pbanner img{height:225px}.pbanner-ov{padding:1.5rem 1.8rem}
+  .pbanner>img{height:220px}
+  .pbanner-ov{padding:1.4rem 1.5rem}
+  .pbanner-inner{gap:.8rem}
+  .pbanner-cta{padding:.5rem 1rem;font-size:.76rem}
   .kb .stag,.kbt h2,.kbt p{text-align:left}
   .hsub{font-size:.9rem}
 }
 
 /* ── 600px ─────────────── */
 @media(max-width:600px){
+  .pbanner>img{height:210px}
+  .pbanner-ov{background:linear-gradient(0deg,rgba(15,74,28,.95) 0%,rgba(15,74,28,.7) 55%,rgba(15,74,28,.15) 100%);align-items:flex-end;padding:0}
+  .pbanner-inner{flex-direction:column;align-items:stretch;gap:0;padding:.9rem 1rem}
+  .pb-pills{position:static;margin-bottom:.55rem}
+  .pb-pill{font-size:.65rem;padding:.22rem .55rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15)}
+  .pb-pill strong{font-size:.72rem}
+  .pbanner-badge{margin-bottom:.3rem}
+  .pbanner-txt{margin-bottom:.6rem}
+  .pbanner-txt h3{font-size:1.05rem;margin-bottom:.2rem}
+  .pbanner-txt p{max-width:100%;font-size:.78rem;line-height:1.45}
+  .pbanner-cta{align-self:flex-start;padding:.5rem 1.1rem;font-size:.78rem}
+  .pb-deco,.pb-deco2{display:none}
   .ptabs{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:0 5% .6rem;margin:0 -5% 1.4rem;gap:.42rem;scrollbar-width:none;-ms-overflow-style:none}
   .ptabs::-webkit-scrollbar{display:none}
   .ptab{scroll-snap-align:start;flex-shrink:0;white-space:nowrap;font-size:.82rem;padding:.34rem .9rem}
@@ -478,10 +509,18 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .nsec{padding:2.6rem 4.5%}
   .pc{min-width:146px}
   .pbanner{border-radius:13px;margin-bottom:1.3rem}
-  .pbanner img{height:170px}
-  .pbanner-ov{padding:1.1rem 1.4rem}
-  .pbanner-txt h3{font-size:.95rem}
-  .pbanner-txt p{font-size:.78rem;max-width:190px;line-height:1.5}
+  .pbanner>img{height:185px}
+  .pbanner-ov{padding:0}
+  .pbanner-inner{padding:.7rem .8rem}
+  .pbanner-txt h3{font-size:.92rem;margin-bottom:.15rem}
+  .pbanner-txt p{font-size:.72rem;line-height:1.4}
+  .pbanner-badge{font-size:.6rem;padding:.16rem .48rem;margin-bottom:.25rem}
+  .pbanner-badge .pb-dot{width:5px;height:5px}
+  .pbanner-cta{padding:.42rem .9rem;font-size:.72rem;gap:.22rem}
+  .pbanner-cta svg{width:12px;height:12px}
+  .pb-pills{margin-bottom:.4rem;gap:.28rem}
+  .pb-pill{font-size:.6rem;padding:.16rem .42rem}
+  .pb-pill strong{font-size:.66rem}
   .kb{margin:0 3.5%;padding:1.4rem 1rem;border-radius:15px}
   .kbt h2{font-size:1.15rem}
   .ki{gap:.32rem}
@@ -514,7 +553,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .fwa{bottom:max(env(safe-area-inset-bottom,0px),.9rem);left:.9rem}
 }
 
-/* Touch device tap feedback — no hover artifacts */
+/* Touch device tap feedback */
 @media(hover:none){
   .cc:active{transform:scale(.96)!important;transition:transform .1s!important}
   .bb:active,.nwa:active{transform:scale(.95)!important;opacity:.9!important;transition:transform .1s,opacity .1s!important}
@@ -524,6 +563,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .ostat:active{transform:scale(.97)!important;transition:transform .1s!important}
   .mm-acts a:active{transform:scale(.95)!important;opacity:.88}
   .cc:hover,.wc:hover,.bb:hover,.ostat:hover{transform:none!important;box-shadow:var(--sh)!important}
+  .pbanner-cta:active{transform:scale(.95)!important;transition:transform .1s!important}
 }</style>
 </head>
 <body>
@@ -589,7 +629,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
     <div class="hero-content">
       <img src="Shop logo.jpeg" class="h-logo" alt="Shubharambh Logo">
       <div class="hb"><span class="pu"></span><span id="hBdg" data-mr="सकाळी 8 ते रात्री 8.30 उघडे" data-en="Open 8 AM – 8:30 PM">सकाळी 8 ते रात्री 8.30 उघडे</span></div>
-      <h1 id="hTitle">तुमच्या गावचे <span class="hl">विश्वासू</span> दुकान</h1>
+      <h1 id="hTitle">आपल्या गावातील <span class="hl">हक्काचं आणि विश्वासाचं</span> ठिकाण</h1>
       <p class="hsub" id="hSub">किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी</p>
       <div class="hbtns">
         <a href="#products" class="bb bg rpl"><span data-mr="📦 प्रॉडक्ट्स पहा" data-en="📦 View Products">📦 प्रॉडक्ट्स पहा</span></a>
@@ -633,15 +673,35 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
     <h2 class="stt" data-mr="दुकानात उपलब्ध" data-en="Available in Store">दुकानात उपलब्ध</h2>
     <p class="sds" data-mr="पाहा आणि दुकानात या किंवा WhatsApp वर चौकशी करा" data-en="Browse and visit store or enquire on WhatsApp">पाहा आणि दुकानात या किंवा WhatsApp वर चौकशी करा</p>
   </div>
+
+  <!-- ═══ Enhanced Product Banner ═══ -->
   <div class="pbanner rv">
-    <img src="Products1.jpeg" alt="Our Products">
+    <img src="Products1.jpeg" alt="आपले कोकण उत्पादने">
+    <div class="pb-deco"></div>
+    <div class="pb-deco2"></div>
     <div class="pbanner-ov">
-      <div class="pbanner-txt">
-        <h3 data-mr="दुकानात येऊन पहा!" data-en="Come Visit Our Store!">दुकानात येऊन पहा!</h3>
-        <p data-mr="शेकडो उत्पादने — स्थानिक दर्जा, घरगुती चव" data-en="Hundreds of products — local quality, homemade taste">शेकडो उत्पादने — स्थानिक दर्जा, घरगुती चव</p>
+      <div class="pbanner-inner">
+        <div class="pb-pills">
+          <div class="pb-pill">🫙 <strong>50+</strong> <span data-mr="उत्पादने" data-en="Products">उत्पादने</span></div>
+          <div class="pb-pill">🏡 <strong>100%</strong> <span data-mr="घरगुती" data-en="Homemade">घरगुती</span></div>
+        </div>
+        <div class="pbanner-txt">
+          <div class="pbanner-badge">
+            <span class="pb-dot"></span>
+            <span data-mr="आता उपलब्ध" data-en="Now Available">आता उपलब्ध</span>
+          </div>
+          <h3 data-mr="<span class='pb-hl'>दुकानात</span> येऊन पहा!" data-en="Come <span class='pb-hl'>Visit</span> Our Store!"><span class="pb-hl">दुकानात</span> येऊन पहा!</h3>
+          <p data-mr="शेकडो उत्पादने — कोकणचा दर्जा, घरगुती चव" data-en="Hundreds of products — Konkan quality, homemade taste">शेकडो उत्पादने — कोकणचा दर्जा, घरगुती चव</p>
+        </div>
+        <a href="#" class="pbanner-cta rpl" id="pbCta" target="_blank">
+          <span data-mr="आजच भेट द्या" data-en="Visit Today">आजच भेट द्या</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
     </div>
   </div>
+  <!-- ═══ End Enhanced Product Banner ═══ -->
+
   <div class="psearch-wrap rv">
     <div class="psearch">
       <span style="font-size:1rem;color:var(--gr)">🔍</span>
@@ -749,9 +809,7 @@ const PK='shubharambh_products',SK='shubharambh_settings',CK='shubharambh_catego
 const dC=[{id:'snacks',name:'स्नॅक्स व फरसाण',nameEn:'Snacks & Farsan',icon:'🍘'},{id:'drinks',name:'थंड पेये',nameEn:'Drinks',icon:'🥤'},{id:'konkan',name:'कोकण स्पेशल',nameEn:'Konkan',icon:'🌿'},{id:'festival',name:'सण-उत्सव',nameEn:'Festival',icon:'🎉'},{id:'daily',name:'दैनंदिन',nameEn:'Daily',icon:'🛒'}];
 const dT=[{id:'new',name:'नवीन',nameEn:'New',color:'#9B1B30'},{id:'best',name:'बेस्टसेलर',nameEn:'Best',color:'#F59E0B'},{id:'popular',name:'लोकप्रिय',nameEn:'Popular',color:'#1B6B2A'},{id:'offer',name:'ऑफर',nameEn:'Offer',color:'#DC2626'},{id:'homemade',name:'घरगुती',nameEn:'Homemade',color:'#0F4A1C'}];
 const gv=k=>JSON.parse(localStorage.getItem(k)||'null');
-/** Admin panel (admin.html) uses short keys (n, cat, img…); storefront uses long keys — normalize here */
 function normP(p){if(!p)return null;
-/* sellingPrice = what we charge; originalPrice = MRP / listed price */
 const sp=p.sellingPrice!==undefined&&p.sellingPrice!==''?p.sellingPrice:(p.price!==undefined&&p.price!==''?p.price:p.pr);
 const op=p.originalPrice!==undefined&&p.originalPrice!==''?p.originalPrice:(p.oldPrice!==undefined&&p.oldPrice!==''?p.oldPrice:p.op);
 return{id:p.id,name:p.name||p.n||'',nameEn:p.nameEn||p.ne||'',category:p.category||p.cat||'daily',tag:p.tag||'',sellingPrice:sp,originalPrice:op,description:p.description||p.d||'',descriptionEn:p.descriptionEn||p.de||'',image:p.image||p.img||'',isUnique:!!(p.isUnique||p.iu),addedAt:p.addedAt||p.ca||null}}
@@ -764,15 +822,9 @@ const gP=()=>(gv(PK)||[]).map(normP).filter(Boolean),gS=()=>normS(gv(SK)||{}),gC
 let lang='mr';
 function setL(l){lang=l;document.body.classList.toggle('en',l==='en');document.querySelectorAll('.lt').forEach(lt=>{lt.querySelectorAll('span').forEach(s=>{s.classList.toggle('ac',s.textContent.includes(l==='mr'?'मरा':'Eng'))})});document.querySelectorAll('[data-mr]').forEach(el=>{el.innerHTML=el.getAttribute('data-'+l)||el.getAttribute('data-mr')});const inp=document.getElementById('pSearch');if(inp)inp.placeholder=l==='en'?inp.getAttribute('data-en-ph'):inp.getAttribute('data-mr-ph');rH();rP();rN();rA();rF();rCat()}
 
-function rH(){const co=gCO(),s=gS();document.getElementById('hTitle').innerHTML=lang==='mr'?(co.cHM||'तुमच्या गावचे <span class="hl">विश्वासू</span> दुकान'):(co.cHE||'Your Trusted <span class="hl">Village</span> Store');document.getElementById('hSub').textContent=lang==='mr'?(co.cSM||'किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी'):(co.cSE||'Groceries, cold drinks, ice cream, snacks, festival items, pickles, dry fruits — all under one roof');if(s.timings)document.getElementById('hBdg').setAttribute('data-mr',s.timings+' उघडे');document.querySelector('.hero')?.classList.add('hero-ui-ready')}
+function rH(){const co=gCO(),s=gS();document.getElementById('hTitle').innerHTML=lang==='mr'?(co.cHM||'आपल्या गावातील <span class="hl">हक्काचं आणि विश्वासाचं</span> ठिकाण'):(co.cHE||'Your Trusted <span class="hl">Village</span> Store');document.getElementById('hSub').textContent=lang==='mr'?(co.cSM||'किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी'):(co.cSE||'Groceries, cold drinks, ice cream, snacks, festival items, pickles, dry fruits — all under one roof');if(s.timings)document.getElementById('hBdg').setAttribute('data-mr',s.timings+' उघडे');document.querySelector('.hero')?.classList.add('hero-ui-ready')}
 
-/* Pricing logic:
-   - originalPrice = MRP / listed price (p.originalPrice)
-   - sellingPrice  = what we charge today  (p.sellingPrice)
-   - If originalPrice > sellingPrice  → valid discount: show sellingPrice + strikethrough originalPrice
-   - If originalPrice <= sellingPrice → selling is NOT cheaper; just show originalPrice
-   - If only one price present        → show it as-is */
-function mkPrice(p,showPr){if(!showPr)return'<span></span>';const sell=p.sellingPrice!==''&&p.sellingPrice!=null?parseFloat(p.sellingPrice):NaN;const orig=p.originalPrice!==''&&p.originalPrice!=null?parseFloat(p.originalPrice):NaN;const hasSell=!isNaN(sell)&&sell>0;const hasOrig=!isNaN(orig)&&orig>0;if(!hasSell&&!hasOrig)return'<span></span>';if(hasOrig&&hasSell){if(orig>sell){const pct=Math.round((orig-sell)/orig*100);return'<div class="pp"><div class="pp-row"><span class="pp-now">₹'+sell+'</span><span class="pp-old">₹'+orig+'</span><span class="pp-dis">'+pct+'% OFF</span></div></div>'}/* sell >= orig — no valid discount; show original price only */return'<span class="pp">₹'+orig+'</span>'}return'<span class="pp">₹'+(hasOrig?orig:sell)+'</span>'}
+function mkPrice(p,showPr){if(!showPr)return'<span></span>';const sell=p.sellingPrice!==''&&p.sellingPrice!=null?parseFloat(p.sellingPrice):NaN;const orig=p.originalPrice!==''&&p.originalPrice!=null?parseFloat(p.originalPrice):NaN;const hasSell=!isNaN(sell)&&sell>0;const hasOrig=!isNaN(orig)&&orig>0;if(!hasSell&&!hasOrig)return'<span></span>';if(hasOrig&&hasSell){if(orig>sell){const pct=Math.round((orig-sell)/orig*100);return'<div class="pp"><div class="pp-row"><span class="pp-now">₹'+sell+'</span><span class="pp-old">₹'+orig+'</span><span class="pp-dis">'+pct+'% OFF</span></div></div>'}return'<span class="pp">₹'+orig+'</span>'}return'<span class="pp">₹'+(hasOrig?orig:sell)+'</span>'}
 function mkC(p,nw){const ts=gT(),st=gS(),sp=st.showPrices!==false;const tg=ts.find(t=>t.id===p.tag);const nm=lang==='en'&&p.nameEn?p.nameEn:p.name;const ds=lang==='en'&&p.descriptionEn?p.descriptionEn:p.description;const img=p.image?'<img src="'+p.image+'" loading="lazy">':'<div class="noi">📷</div>';const th=tg?'<span class="pt" style="background:'+tg.color+'">'+(lang==='en'?tg.nameEn:tg.name)+'</span>':'';const nb=(p.tag==='new'&&nw)?'<span class="nb">✨ '+(lang==='mr'?'नवीन':'NEW')+'</span>':'';const pr=mkPrice(p,sp);const waTxt=lang==='mr'?'विचारा':'Ask';const uqClass=p.isUnique?' pc-unique':'';const uqBadge=p.isUnique?'<span class="uniq-badge">✦ '+(lang==='mr'?'विशेष':'Unique')+'</span>':'';return '<div class="pc rv'+uqClass+'"><div class="pc-glare"></div><div class="pi">'+img+th+nb+'</div><div class="pb"><h4>'+nm+uqBadge+'</h4>'+(ds?'<p class="ps">'+ds+'</p>':'')+'<div class="pf">'+pr+'<button class="pwi rpl" onclick="waE(\''+nm.replace(/'/g,"\\'")+'\',event)" title="'+waTxt+' on WhatsApp" style="min-width:72px;border-radius:50px;font-size:.78rem;font-weight:700;gap:.3rem;padding:0 .7rem"><span>💬</span><span>'+waTxt+'</span></button></div></div></div>'}
 
 function mkDots(count){const dc=document.getElementById('siDots');if(!dc)return;dc.innerHTML='';for(let i=0;i<count;i++){const b=document.createElement('button');b.className='si-dot'+(i===0?' ac':'');b.onclick=()=>goSlide(i);dc.appendChild(b)}}
@@ -793,11 +845,11 @@ function fTo(c){af=c;rP();rCat()}
 
 function rMq(){const pr=gP();let it=pr.length?pr.map(p=>lang==='en'&&p.nameEn?p.nameEn:p.name):['प्लेट्स','ग्लासेस','ज्यूस','आइस्क्रीम','फरसाण','काजू','पापड','लोणचे','कोकम','फणसाचे गरे'];document.getElementById('mqT').innerHTML=[...it,...it].map(i=>'<span><span class="dt"></span>'+i+'</span>').join('')}
 
-function rA(){const co=gCO(),s=gS();document.getElementById('aText').textContent=lang==='mr'?(co.cAM||'शुभारंभ स्टोअर्सची स्थापना 2024 साली रविंद्र अणेराव आणि रूपम अणेराव यांनी केली. दैनंदिन वस्तू, स्नॅक्स, आइस्क्रीम, थंड पेये, सणाच्या वस्तू, लोणचे, पापड आणि कोकणातील उत्पादने उपलब्ध.'):(co.cAE||'Established in 2024 by Ravindra & Rupam Anerao. Daily essentials, snacks, ice cream, cold drinks, festival items, pickles, papads and Konkan products available.');const addr=lang==='mr'?(s.addressMr||'तुमचे गाव,आंगवली'):(s.addressEn||'Your Village, Angavali');document.getElementById('aDets').innerHTML='<div class="oinfo-item">📍 '+addr+'</div><div class="oinfo-item">⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</div><div class="oinfo-item">📞 '+(s.phone||'+91 8208674432')+'</div>'}
+function rA(){const co=gCO(),s=gS();document.getElementById('aText').textContent=lang==='mr'?(co.cAM||'श्री. रविंद्र अणेराव आणि श्रीमती रूपम अणेराव यांनी सन 2024 मध्ये ग्रामीण भागातील लोकांसाठी शुभारंभ स्टोअर्स अँड कोल्ड ड्रिंक्स सुरू केले. आमच्या दुकानात दैनंदिन जीवनासाठी लागणाऱ्या वस्तू, स्नॅक्स आणि ताजे थंड पेये मिळतात. आम्ही नेहमी ग्राहकांना उत्तम दर्जाचे उत्पादने परवडणाऱ्या किमतीत देण्याचा प्रयत्न करतो. ग्रामीण भागातील ग्राहकांसाठी सोयीस्कर सेवा, ताजेतवाने थंड पेये आणि घरगुती वापराच्या वस्तू – हेच आमचे मुख्य ध्येय आहे.\n\nआमच्या दुकानात उपलब्ध असणारी उत्पादने, जसे की आंबा, फणस, कोकण सरबत, गोड कोकम, आंबा रस, आवळा सरबत तसेच कुळीद पीठ, डांगर पीठ मुख्यतः कोकणातील विविध घरगुती उद्योगांमधून येतात. आमचे ध्येय आहे की गावातील ग्राहकांना बाहेरून येणाऱ्या लोकांसाठी देखील गुणवत्तापूर्ण, नैसर्गिक पद्धतीने तयार केलेली उत्पादने सहज उपलब्ध व्हावीत, त्यामुळे त्यांना बाहेर जाऊन शोधण्याची गरज पडू नये.'):(co.cAE||'Mr. Ravindra Anerao and Mrs. Roopam Anerao started Shubharambh Stores & Cold Drinks in 2024 to serve people in rural areas. Our shop offers everyday essential items, snacks, and fresh cold beverages. We always strive to provide customers with high-quality products at affordable prices.\n\nConvenient service for rural customers, refreshing cold drinks, and household necessities — this is our main goal.\n\nThe products available in our shop—such as mangoes, jackfruit, Kokum-based drinks (Kokum sharbat and sweet Kokum), mango pulp, amla (gooseberry) sharbat, as well as Kulith flour and Dangar flour—mainly come from various home-based industries in the Konkan region.\n\nOur aim is to make high-quality, naturally prepared products easily available to village customers as well as visitors from outside, so they do not have to go elsewhere in search of them.');const addr=lang==='mr'?(s.addressMr||'तुमचे गाव,आंगवली'):(s.addressEn||'Your Village, Angavali');document.getElementById('aDets').innerHTML='<div class="oinfo-item">📍 '+addr+'</div><div class="oinfo-item">⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</div><div class="oinfo-item">📞 '+(s.phone||'+91 8208674432')+'</div>'}
 
 function rF(){const cs=gC(),s=gS();const fc=document.getElementById('ftCa');fc.innerHTML='<h5>'+(lang==='mr'?'श्रेण्या':'Categories')+'</h5>';cs.forEach(c=>fc.innerHTML+='<a href="#products">'+(lang==='en'?c.nameEn:c.name)+'</a>');const fco=document.getElementById('ftCo');fco.innerHTML='<h5>'+(lang==='mr'?'संपर्क':'Contact')+'</h5>';fco.innerHTML+='<a>📍 '+(lang==='mr'?(s.addressMr||'तुमचे गाव'):(s.addressEn||'Your Village'))+'</a>';fco.innerHTML+='<a href="tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'')+'">📞 '+(s.phone||'+91 8208674432')+'</a>';fco.innerHTML+='<a href="https://wa.me/'+(s.whatsapp||'918208674432')+'">🟢 WhatsApp</a>';fco.innerHTML+='<a>⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</a>';document.getElementById('ftL').textContent=(lang==='mr'?(s.name||'शुभारंभ'):(s.nameEn||'Shubharambh'));document.getElementById('ftD').textContent=lang==='mr'?'रविंद्र व रूपम अणेराव — गावचे दुकान.':'By Ravindra & Rupam Anerao.'}
 
-function appS(){const s=gS();const wa='https://wa.me/'+(s.whatsapp||'918208674432');document.querySelectorAll('#navW,#hWa,#ctaW,#floatWa,#mmWa').forEach(el=>{if(el)el.href=wa});const ph='tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'');document.getElementById('ctaP').href=ph;const mmPh=document.getElementById('mmPh');if(mmPh)mmPh.href=ph;if(s.showKonkan===false)document.getElementById('kSec').style.display='none'}
+function appS(){const s=gS();const wa='https://wa.me/'+(s.whatsapp||'918208674432');document.querySelectorAll('#navW,#hWa,#ctaW,#floatWa,#mmWa,#pbCta').forEach(el=>{if(el)el.href=wa});const ph='tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'');document.getElementById('ctaP').href=ph;const mmPh=document.getElementById('mmPh');if(mmPh)mmPh.href=ph;if(s.showKonkan===false)document.getElementById('kSec').style.display='none'}
 
 function waE(nm,ev){const s=gS();const msg=lang==='mr'?'नमस्कार! मला या प्रॉडक्टबद्दल विचारायचे आहे: '+nm:'Hi! I want to enquire about: '+nm;window.open('https://wa.me/'+(s.whatsapp||'918208674432')+'?text='+encodeURIComponent(msg),'_blank')}
 
@@ -811,7 +863,6 @@ function chkOpen(){
   if(fwaLbl)fwaLbl.textContent=lang==='mr'?(isOpen?'WhatsApp वर विचारा':'WhatsApp'):'WhatsApp';
 }
 
-// 3D Card Tilt (desktop only)
 function init3DTilt(){
   if(window.innerWidth<768)return;
   document.querySelectorAll('.pg .pc,.si .pc').forEach(card=>{
@@ -837,7 +888,6 @@ function init3DTilt(){
   });
 }
 
-// Floating particles
 function initParticles(){
   const c=document.getElementById('heroParticles');
   const items=['🏪','🛒','🌿','🎉','🥤','🍘','🫙','💰','🌾','🥭','🍯','🧂','🍭','🥛','🎁'];
@@ -854,7 +904,6 @@ function initParticles(){
   setInterval(mkP,2200);
 }
 
-// Scroll progress
 function initScrollProgress(){
   const bar=document.getElementById('spb');
   if(!bar)return;
@@ -865,7 +914,6 @@ function initScrollProgress(){
   },{passive:true});
 }
 
-// Ripple effect
 function initRipple(){
   document.querySelectorAll('.rpl').forEach(btn=>{
     btn.addEventListener('click',e=>{
@@ -880,7 +928,6 @@ function initRipple(){
   });
 }
 
-// Counter animation for owner stats
 function animateCounters(){
   const targets=[{id:'cnt1',val:2024,sfx:''},{id:'cnt2',val:100,sfx:'+'},{id:'cnt3',val:500,sfx:'+'}];
   targets.forEach(({id,val,sfx})=>{
@@ -907,7 +954,6 @@ function revealVisibleRv(){
   });
 }
 
-// Trigger counter when owner section is visible
 const cntObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateCounters();cntObs.disconnect()}})},{threshold:.3});
 
 function togM(){
@@ -918,7 +964,6 @@ function togM(){
   document.body.style.overflow=open?'hidden':'';
 }
 
-/** Light bar + dark text when nav no longer sits over the dark hero */
 function updateNavTheme(){
   const nav=document.getElementById('nav');
   const hero=document.getElementById('home');
@@ -929,11 +974,9 @@ function updateNavTheme(){
   nav.classList.toggle('sc',!navOverDarkHero);
 }
 
-/** Re-read localStorage when admin saves in another tab (same origin) */
 function refreshData(){appS();rH();rMq();rN();rCat();rP();rA();rF();chkOpen();updateNavTheme()}
 window.addEventListener('storage',e=>{if(e.key&&e.key.indexOf('shubharambh')===0)refreshData()});
 
-/** Hosted site: fetch site-data.json (same format as Admin export) so all visitors see one dataset */
 async function loadSiteData(){
   const base=(typeof window.SITE_DATA_URL==='string'&&window.SITE_DATA_URL.trim())?window.SITE_DATA_URL.trim():'site-data.json';
   try{
@@ -941,8 +984,6 @@ async function loadSiteData(){
     const r=await fetch(base+sep+'t='+Date.now(),{cache:'no-store'});
     if(!r.ok)return;
     const d=await r.json();
-    // _forceSync:true means admin explicitly exported — always overwrite.
-    // Without it, skip empty arrays so default site-data.json never wipes admin data.
     const force=d._forceSync===true;
     if(Array.isArray(d.products)&&(d.products.length>0||force))localStorage.setItem(PK,JSON.stringify(d.products));
     if(d.settings&&typeof d.settings==='object')localStorage.setItem(SK,JSON.stringify(d.settings));
@@ -982,7 +1023,6 @@ window.addEventListener('load',()=>{
   const ld=document.getElementById('ld');
   if(ld)ld.classList.add('hide');
 });
-// Dynamic copyright year
 document.addEventListener('DOMContentLoaded',()=>{const y=new Date().getFullYear();const c=document.querySelector('.fbot p');if(c&&c.textContent.includes('2024'))c.textContent='© '+y+' शुभारंभ स्टोअर्स'});
 </script>
 </body>
