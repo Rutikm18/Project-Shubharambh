@@ -87,8 +87,9 @@ nav:not(.sc) .ham span{background:white}
 .mm-acts{display:flex;gap:.65rem;padding:.7rem 1.4rem 1.1rem}
 .mm-acts a{flex:1;display:flex;align-items:center;justify-content:center;gap:.4rem;padding:.72rem .5rem;border-radius:12px;font-size:.85rem;font-weight:700;transition:transform .15s,opacity .15s;color:var(--w)}
 .mm-acts a:active{transform:scale(.96);opacity:.88}
-.mm-wabtn{background:#25D366}
+.mm-wabtn{background:#25D366;animation:waGlow 2.6s ease-in-out infinite}
 .mm-phbtn{background:var(--g)}
+@keyframes waGlow{0%,100%{box-shadow:0 4px 18px rgba(37,211,102,.35)}55%{box-shadow:0 4px 28px rgba(37,211,102,.65),0 0 0 5px rgba(37,211,102,.1)}}
 
 /* Hero */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:7rem 5% 5rem;position:relative;overflow:hidden;background:#0F4A1C}
@@ -149,12 +150,12 @@ nav:not(.sc) .ham span{background:white}
 /* Product Card */
 .pc{min-width:210px;flex-shrink:0;background:var(--w);border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:transform .35s,box-shadow .35s;cursor:default;position:relative;box-shadow:var(--sh)}
 .pc:hover{transform:translateY(-7px) scale(1.012);box-shadow:var(--sl)}
-.pc .pi{height:170px;overflow:hidden;position:relative;background:linear-gradient(145deg,var(--l),var(--cr))}
-.pc .pi img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pc .pi{width:100%;min-height:0;height:160px;overflow:hidden;position:relative;background:linear-gradient(145deg,var(--l),var(--cr))}
+.pc .pi img{position:absolute;inset:0;z-index:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;display:block;transition:transform .5s}
 .pc:hover .pi img{transform:scale(1.09)}
-.pc .pi .noi{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--gr)}
-.pt{position:absolute;top:.5rem;left:.5rem;padding:.2rem .55rem;border-radius:50px;font-size:.9rem;font-weight:700;color:var(--w)}
-.pc .nb{position:absolute;top:.5rem;right:.5rem;background:var(--k);color:var(--w);padding:.22rem .55rem;border-radius:50px;font-size:.9rem;font-weight:700;animation:np 2s infinite}
+.pc .pi .noi{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:var(--gr)}
+.pt{position:absolute;z-index:1;top:.5rem;left:.5rem;padding:.2rem .55rem;border-radius:50px;font-size:.9rem;font-weight:700;color:var(--w)}
+.pc .nb{position:absolute;z-index:1;top:.5rem;right:.5rem;background:var(--k);color:var(--w);padding:.22rem .55rem;border-radius:50px;font-size:.9rem;font-weight:700;animation:np 2s infinite}
 @keyframes np{0%,100%{box-shadow:0 0 0 0 rgba(155,27,48,.3)}50%{box-shadow:0 0 0 6px rgba(155,27,48,0)}}
 .pb{padding:.88rem 1rem 1rem}
 .pb h4{font-size:1rem;font-weight:700;margin-bottom:.2rem;line-height:1.3}
@@ -166,6 +167,16 @@ nav:not(.sc) .ham span{background:white}
 .pp-old{color:var(--gr);font-weight:400;text-decoration:line-through;font-size:.78rem}
 .pp-dis{background:#DC2626;color:#fff;font-size:.6rem;font-weight:700;padding:.12rem .38rem;border-radius:50px;letter-spacing:.02em;white-space:nowrap}
 .pc-unique{border:2px solid var(--m)!important;box-shadow:0 8px 28px rgba(245,158,11,.18)!important}
+/* Per-category brand accent tokens */
+.pc-cat-snacks{--cat-c:#F97316;--cat-s:rgba(249,115,22,.18);--cat-top:rgba(249,115,22,.55)}
+.pc-cat-drinks{--cat-c:#0891B2;--cat-s:rgba(8,145,178,.18);--cat-top:rgba(8,145,178,.55)}
+.pc-cat-konkan{--cat-c:#15803D;--cat-s:rgba(21,128,61,.2);--cat-top:rgba(21,128,61,.55)}
+.pc-cat-festival{--cat-c:#9333EA;--cat-s:rgba(147,51,234,.18);--cat-top:rgba(147,51,234,.55)}
+.pc-cat-daily{--cat-c:#B45309;--cat-s:rgba(180,83,9,.16);--cat-top:rgba(180,83,9,.5)}
+/* Animated category border — color driven by CSS token */
+.pc-new-arrival{border:2px solid var(--cat-c,rgba(27,107,42,.35))!important;animation:pcCatGlow 2.8s ease-in-out infinite}
+.pc-new-arrival::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cat-c,var(--g));border-radius:18px 18px 0 0;opacity:.7}
+@keyframes pcCatGlow{0%,100%{box-shadow:var(--sh),0 0 0 0 var(--cat-s,rgba(27,107,42,.15))}50%{box-shadow:var(--sh),0 0 0 5px transparent}}
 .uniq-badge{display:inline-block;background:var(--ml);color:#78350F;font-size:.56rem;font-weight:800;padding:.12rem .38rem;border-radius:50px;letter-spacing:.04em;margin-left:.28rem;vertical-align:middle;line-height:1.4}
 .pwi{height:36px;border-radius:9px;background:var(--gp);border:none;color:var(--g);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .pwi:hover{background:var(--g);color:var(--w);transform:translateY(-2px);box-shadow:0 4px 12px rgba(27,107,42,.25)}
@@ -248,9 +259,9 @@ nav:not(.sc) .ham span{background:white}
 .ki{display:grid;grid-template-columns:1fr 1fr;gap:.45rem}
 .kii{display:flex;align-items:center;gap:.4rem;padding:.45rem .7rem;border-radius:8px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.8);font-size:.95rem;font-weight:500;transition:all .25s;cursor:default}
 .kii:hover{background:rgba(255,255,255,.12);transform:translateX(3px)}
-.kga{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;z-index:2}
-.kga .km{border-radius:14px;overflow:hidden}
-.kga .km img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.kga{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:160px 160px;gap:8px;z-index:2}
+.kga .km{border-radius:14px;overflow:hidden;min-height:0}
+.kga .km img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .5s}
 .kga .km:hover img{transform:scale(1.07)}
 .kga .km.tl{grid-row:span 2}
 
@@ -436,8 +447,17 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 .si-dot{width:7px;height:7px;border-radius:50%;background:var(--l);border:none;cursor:pointer;transition:all .28s cubic-bezier(.34,1.56,.64,1);padding:0;flex-shrink:0}
 .si-dot.ac{background:var(--m);width:20px;border-radius:4px}
 
+/* New Arrivals slider — viewport-relative card + image sizing for consistent 4:3 ratio */
+.nsec .si .pc{min-width:210px}
+.nsec .si .pc .pi{height:158px}
+.nsec .si .pc .pi img{position:absolute;inset:0;z-index:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;display:block}
+/* WA button glow — applies when main buttons link to group */
+.bwa{animation:waGlow 2.6s ease-in-out infinite}
+
 /* ── 1024px ─────────────── */
 @media(max-width:1024px){
+  .nsec .si .pc{min-width:195px}
+  .nsec .si .pc .pi{height:146px}
   .kb{grid-template-columns:1fr;padding:2rem 1.5rem;margin:0 4%}.kga{margin-top:1rem}
   .ft{grid-template-columns:1fr 1fr}
   .owner-wrap{grid-template-columns:1fr;text-align:center;gap:2rem}
@@ -446,6 +466,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 768px ─────────────── */
 @media(max-width:768px){
+  .nsec .si .pc{min-width:58vw}.nsec .si .pc .pi{height:38vw}
   .nl .nn{max-width:min(100%,calc(100vw - 188px));gap:.1rem;padding-left:.48rem}
   .nl .nn::before{top:.15rem;bottom:.15rem;width:2.5px}
   .nl .nn-brand{font-size:.88rem}
@@ -467,7 +488,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   .pc{min-width:156px}
   .kb{padding:1.5rem 1.2rem;margin:0 4%}
   .ki{grid-template-columns:1fr 1fr}
-  .kga{grid-template-columns:1fr}.kga .km.tl{grid-row:auto}
+  .kga{grid-template-columns:1fr 1fr;grid-template-rows:140px 140px}.kga .km.tl{grid-row:span 2}
   .owner-wrap{gap:1.5rem}.owner-img{width:215px;height:265px}
   .owner-stats{grid-template-columns:repeat(3,1fr)}
   .ft{grid-template-columns:1fr 1fr}
@@ -481,6 +502,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 600px ─────────────── */
 @media(max-width:600px){
+  .nsec .si .pc{min-width:68vw}.nsec .si .pc .pi{height:44vw}
   /* Product banner: more image area + readable overlay (was short fixed height) */
   .pbanner{margin-left:-5%;margin-right:-5%;width:calc(100% + 10%);border-radius:16px}
   .pbanner-ov{
@@ -526,6 +548,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 480px ─────────────── */
 @media(max-width:480px){
+  .nsec .si .pc{min-width:72vw}.nsec .si .pc .pi{height:46vw}
   nav{padding:0 4.5%;height:57px}
   .nav-logo{width:50px;height:50px;border-radius:13px}
   .nl .nn{max-width:min(100%,calc(100vw - 168px));gap:.08rem;padding-left:.42rem}
@@ -638,7 +661,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
       <a href="#about" data-mr="आमच्याबद्दल" data-en="About">आमच्याबद्दल</a>
     </div>
     <div class="lt" id="langT"><span class="ac" onclick="setL('mr')">मराठी</span><span onclick="setL('en')">English</span></div>
-    <a href="#" class="nwa rpl" id="navW" target="_blank" data-mr="🟢 चौकशी" data-en="🟢 Enquire">🟢 चौकशी</a>
+    <a href="#" class="nwa rpl" id="navW" target="_blank" data-mr="👥 ग्रुप" data-en="👥 Group">👥 ग्रुप</a>
     <button class="ham" onclick="togM()"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -658,7 +681,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
     <div class="lt" id="mmLt"><span class="ac" onclick="setL('mr')">मराठी</span><span onclick="setL('en')">English</span></div>
   </div>
   <div class="mm-acts">
-    <a href="#" class="mm-wabtn" id="mmWa" target="_blank">🟢 WhatsApp</a>
+    <a href="#" class="mm-wabtn" id="mmWa" target="_blank">👥 <span data-mr="ग्रुप जॉईन करा" data-en="Join Group">ग्रुप जॉईन करा</span></a>
     <a href="#" class="mm-phbtn" id="mmPh">📞 <span data-mr="कॉल करा" data-en="Call">कॉल करा</span></a>
   </div>
 </div>
@@ -679,7 +702,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
       <p class="hsub" id="hSub">किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी</p>
       <div class="hbtns">
         <a href="#products" class="bb bg rpl"><span data-mr="📦 प्रॉडक्ट्स पहा" data-en="📦 View Products">📦 प्रॉडक्ट्स पहा</span></a>
-        <a href="#" class="bb bl rpl" id="hWa" target="_blank"><span data-mr="🟢 WhatsApp चौकशी" data-en="🟢 WhatsApp Enquiry">🟢 WhatsApp चौकशी</span></a>
+        <a href="#" class="bb bwa rpl" id="hWa" target="_blank"><span data-mr="👥 WhatsApp ग्रुप जॉईन करा" data-en="👥 Join WhatsApp Group">👥 WhatsApp ग्रुप जॉईन करा</span></a>
       </div>
       <div class="htrust">
         <div>📍 <span data-mr="दुकानात भेट द्या" data-en="Visit Our Store">दुकानात भेट द्या</span></div>
@@ -826,7 +849,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
     <h2 data-mr="काही हवे आहे? चौकशी करा!" data-en="Need Something? Enquire!">काही हवे आहे? चौकशी करा!</h2>
     <p class="ctasub" data-mr="WhatsApp वर विचारा किंवा थेट दुकानात या" data-en="Ask on WhatsApp or visit us">WhatsApp वर विचारा किंवा थेट दुकानात या</p>
     <div class="ctab">
-      <a href="#" class="bb bwa rpl" id="ctaW" target="_blank"><span data-mr="🟢 WhatsApp चौकशी" data-en="🟢 WhatsApp">🟢 WhatsApp चौकशी</span></a>
+      <a href="#" class="bb bwa rpl" id="ctaW" target="_blank"><span data-mr="👥 WhatsApp ग्रुप जॉईन करा" data-en="👥 Join WhatsApp Group">👥 WhatsApp ग्रुप जॉईन करा</span></a>
       <a href="#" class="bb bcl rpl" id="ctaP"><span data-mr="📞 फोन करा" data-en="📞 Call">📞 फोन करा</span></a>
     </div>
   </div>
@@ -854,6 +877,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 <script>
 const PK='shubharambh_products',SK='shubharambh_settings',CK='shubharambh_categories',TK='shubharambh_tags',COK='shubharambh_content';
+const WA_GROUP='https://chat.whatsapp.com/CAMaNbtoO3J7vdsEH3thc9?mode=gi_t';
 const dC=[{id:'snacks',name:'स्नॅक्स व फरसाण',nameEn:'Snacks & Farsan',icon:'🍘'},{id:'drinks',name:'थंड पेये',nameEn:'Drinks',icon:'🥤'},{id:'konkan',name:'कोकण स्पेशल',nameEn:'Konkan',icon:'🌿'},{id:'festival',name:'सण-उत्सव',nameEn:'Festival',icon:'🎉'},{id:'daily',name:'दैनंदिन',nameEn:'Daily',icon:'🛒'}];
 const dT=[{id:'new',name:'नवीन',nameEn:'New',color:'#9B1B30'},{id:'best',name:'बेस्टसेलर',nameEn:'Best',color:'#F59E0B'},{id:'popular',name:'लोकप्रिय',nameEn:'Popular',color:'#1B6B2A'},{id:'offer',name:'ऑफर',nameEn:'Offer',color:'#DC2626'},{id:'homemade',name:'घरगुती',nameEn:'Homemade',color:'#0F4A1C'}];
 const gv=k=>JSON.parse(localStorage.getItem(k)||'null');
@@ -875,7 +899,7 @@ function setL(l){lang=l;document.body.classList.toggle('en',l==='en');document.q
 function rH(){const co=gCO(),s=gS();document.getElementById('hTitle').innerHTML=lang==='mr'?(co.cHM||'आपल्या गावातील <span class="hl">हक्काचं आणि विश्वासाचं</span> ठिकाण'):(co.cHE||'Your Trusted <span class="hl">Village</span> Store');document.getElementById('hSub').textContent=lang==='mr'?(co.cSM||'किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी'):(co.cSE||'Groceries, cold drinks, ice cream, snacks, festival items, pickles, dry fruits — all under one roof');if(s.timings)document.getElementById('hBdg').setAttribute('data-mr',s.timings+' उघडे');document.querySelector('.hero')?.classList.add('hero-ui-ready')}
 
 function mkPrice(p,showPr){if(!showPr)return'<span></span>';const sell=p.sellingPrice!==''&&p.sellingPrice!=null?parseFloat(p.sellingPrice):NaN;const orig=p.originalPrice!==''&&p.originalPrice!=null?parseFloat(p.originalPrice):NaN;const hasSell=!isNaN(sell)&&sell>0;const hasOrig=!isNaN(orig)&&orig>0;if(!hasSell&&!hasOrig)return'<span></span>';if(hasOrig&&hasSell){if(orig>sell){const pct=Math.round((orig-sell)/orig*100);return'<div class="pp"><div class="pp-row"><span class="pp-now">₹'+sell+'</span><span class="pp-old">₹'+orig+'</span><span class="pp-dis">'+pct+'% OFF</span></div></div>'}return'<span class="pp">₹'+orig+'</span>'}return'<span class="pp">₹'+(hasOrig?orig:sell)+'</span>'}
-function mkC(p,nw){const ts=gT(),st=gS(),sp=st.showPrices!==false;const tg=ts.find(t=>t.id===p.tag);const nm=lang==='en'&&p.nameEn?p.nameEn:p.name;const ds=lang==='en'&&p.descriptionEn?p.descriptionEn:p.description;const img=p.image?'<img src="'+p.image+'" loading="lazy">':'<div class="noi">📷</div>';const th=tg?'<span class="pt" style="background:'+tg.color+'">'+(lang==='en'?tg.nameEn:tg.name)+'</span>':'';const nb=(p.tag==='new'&&nw)?'<span class="nb">✨ '+(lang==='mr'?'नवीन':'NEW')+'</span>':'';const pr=mkPrice(p,sp);const waTxt=lang==='mr'?'विचारा':'Ask';const uqClass=p.isUnique?' pc-unique':'';const uqBadge=p.isUnique?'<span class="uniq-badge">✦ '+(lang==='mr'?'विशेष':'Unique')+'</span>':'';return '<div class="pc rv'+uqClass+'"><div class="pc-glare"></div><div class="pi">'+img+th+nb+'</div><div class="pb"><h4>'+nm+uqBadge+'</h4>'+(ds?'<p class="ps">'+ds+'</p>':'')+'<div class="pf">'+pr+'<button class="pwi rpl" onclick="waE(\''+nm.replace(/'/g,"\\'")+'\',event)" title="'+waTxt+' on WhatsApp" style="min-width:72px;border-radius:50px;font-size:.78rem;font-weight:700;gap:.3rem;padding:0 .7rem"><span>💬</span><span>'+waTxt+'</span></button></div></div></div>'}
+function mkC(p,nw){const ts=gT(),st=gS(),sp=st.showPrices!==false;const tg=ts.find(t=>t.id===p.tag);const nm=lang==='en'&&p.nameEn?p.nameEn:p.name;const ds=lang==='en'&&p.descriptionEn?p.descriptionEn:p.description;const img=p.image?'<img src="'+p.image+'" loading="lazy">':'<div class="noi">📷</div>';const th=tg?'<span class="pt" style="background:'+tg.color+'">'+(lang==='en'?tg.nameEn:tg.name)+'</span>':'';const nb=(p.tag==='new')?'<span class="nb">✨ '+(lang==='mr'?'नवीन':'NEW')+'</span>':'';const pr=mkPrice(p,sp);const waTxt=lang==='mr'?'विचारा':'Ask';const uqClass=p.isUnique?' pc-unique':'';const uqBadge=p.isUnique?'<span class="uniq-badge">✦ '+(lang==='mr'?'विशेष':'Unique')+'</span>':'';const catClass=' pc-cat-'+(p.category||'daily');return '<div class="pc rv pc-new-arrival'+catClass+uqClass+'"><div class="pc-glare"></div><div class="pi">'+img+th+nb+'</div><div class="pb"><h4>'+nm+uqBadge+'</h4>'+(ds?'<p class="ps">'+ds+'</p>':'')+'<div class="pf">'+pr+'<button class="pwi rpl" onclick="waE(\''+nm.replace(/'/g,"\\'")+'\',event)" title="'+waTxt+' on WhatsApp" style="min-width:72px;border-radius:50px;font-size:.78rem;font-weight:700;gap:.3rem;padding:0 .7rem"><span>💬</span><span>'+waTxt+'</span></button></div></div></div>'}
 
 function mkDots(count){const dc=document.getElementById('siDots');if(!dc)return;dc.innerHTML='';for(let i=0;i<count;i++){const b=document.createElement('button');b.className='si-dot'+(i===0?' ac':'');b.onclick=()=>goSlide(i);dc.appendChild(b)}}
 function updDots(idx){document.querySelectorAll('.si-dot').forEach((d,i)=>d.classList.toggle('ac',i===idx))}
@@ -897,9 +921,9 @@ function rMq(){const pr=gP();let it=pr.length?pr.map(p=>lang==='en'&&p.nameEn?p.
 
 function rA(){const co=gCO(),s=gS();document.getElementById('aText').textContent=lang==='mr'?(co.cAM||'श्री. रविंद्र अणेराव आणि सौ. रूपम अणेराव यांनी सन 2024 मध्ये ग्रामीण भागातील लोकांसाठी शुभारंभ स्टोअर्स अँड कोल्ड ड्रिंक्स सुरू केले. आमच्या दुकानात दैनंदिन जीवनासाठी लागणाऱ्या वस्तू, स्नॅक्स आणि ताजे थंड पेये मिळतात. आम्ही नेहमी ग्राहकांना उत्तम दर्जाचे उत्पादने परवडणाऱ्या किमतीत देण्याचा प्रयत्न करतो. ग्रामीण भागातील ग्राहकांसाठी सोयीस्कर सेवा, ताजेतवाने थंड पेये आणि घरगुती वापराच्या वस्तू – हेच आमचे मुख्य ध्येय आहे.\n\nआमच्या दुकानात उपलब्ध असणारी उत्पादने, जसे की आंबा, फणस, कोकण सरबत, गोड कोकम, आंबा रस, आवळा सरबत तसेच कुळीद पीठ, डांगर पीठ मुख्यतः कोकणातील विविध घरगुती उद्योगांमधून येतात. आमचे ध्येय आहे की गावातील ग्राहकांना बाहेरून येणाऱ्या लोकांसाठी देखील गुणवत्तापूर्ण, नैसर्गिक पद्धतीने तयार केलेली उत्पादने सहज उपलब्ध व्हावीत, त्यामुळे त्यांना बाहेर जाऊन शोधण्याची गरज पडू नये.'):(co.cAE||'Mr. Ravindra Anerao and Mrs. Roopam Anerao started Shubharambh Stores & Cold Drinks in 2024 to serve people in rural areas. Our shop offers everyday essential items, snacks, and fresh cold beverages. We always strive to provide customers with high-quality products at affordable prices.\n\nConvenient service for rural customers, refreshing cold drinks, and household necessities — this is our main goal.\n\nThe products available in our shop—such as mangoes, jackfruit, Kokum-based drinks (Kokum sharbat and sweet Kokum), mango pulp, amla (gooseberry) sharbat, as well as Kulith flour and Dangar flour—mainly come from various home-based industries in the Konkan region.\n\nOur aim is to make high-quality, naturally prepared products easily available to village customers as well as visitors from outside, so they do not have to go elsewhere in search of them.');const addr=lang==='mr'?(s.addressMr||'तुमचे गाव,आंगवली'):(s.addressEn||'Your Village, Angavali');document.getElementById('aDets').innerHTML='<div class="oinfo-item">📍 '+addr+'</div><div class="oinfo-item">⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</div><div class="oinfo-item">📞 '+(s.phone||'+91 8208674432')+'</div>'}
 
-function rF(){const cs=gC(),s=gS();const fc=document.getElementById('ftCa');fc.innerHTML='<h5>'+(lang==='mr'?'श्रेण्या':'Categories')+'</h5>';cs.forEach(c=>fc.innerHTML+='<a href="#products">'+(lang==='en'?c.nameEn:c.name)+'</a>');const fco=document.getElementById('ftCo');fco.innerHTML='<h5>'+(lang==='mr'?'संपर्क':'Contact')+'</h5>';fco.innerHTML+='<a>📍 '+(lang==='mr'?(s.addressMr||'तुमचे गाव'):(s.addressEn||'Your Village'))+'</a>';fco.innerHTML+='<a href="tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'')+'">📞 '+(s.phone||'+91 8208674432')+'</a>';fco.innerHTML+='<a href="https://wa.me/'+(s.whatsapp||'918208674432')+'">🟢 WhatsApp</a>';fco.innerHTML+='<a>⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</a>';document.getElementById('ftL').textContent=(lang==='mr'?(s.name||'शुभारंभ'):(s.nameEn||'Shubharambh'));document.getElementById('ftD').textContent=lang==='mr'?'श्री.रविंद्र व सौ.रूपम अणेराव — गावचे दुकान.':'By Ravindra & Rupam Anerao.';setNavBrand()}
+function rF(){const cs=gC(),s=gS();const fc=document.getElementById('ftCa');fc.innerHTML='<h5>'+(lang==='mr'?'श्रेण्या':'Categories')+'</h5>';cs.forEach(c=>fc.innerHTML+='<a href="#products">'+(lang==='en'?c.nameEn:c.name)+'</a>');const fco=document.getElementById('ftCo');fco.innerHTML='<h5>'+(lang==='mr'?'संपर्क':'Contact')+'</h5>';fco.innerHTML+='<a>📍 '+(lang==='mr'?(s.addressMr||'तुमचे गाव'):(s.addressEn||'Your Village'))+'</a>';fco.innerHTML+='<a href="tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'')+'">📞 '+(s.phone||'+91 8208674432')+'</a>';fco.innerHTML+='<a href="'+WA_GROUP+'" target="_blank">👥 '+(lang==='mr'?'WhatsApp ग्रुप जॉईन करा':'Join WhatsApp Group')+'</a>';fco.innerHTML+='<a>⏰ '+(s.timings||'सकाळी 8 ते रात्री 8.30')+'</a>';document.getElementById('ftL').textContent=(lang==='mr'?(s.name||'शुभारंभ'):(s.nameEn||'Shubharambh'));document.getElementById('ftD').textContent=lang==='mr'?'श्री.रविंद्र व सौ.रूपम अणेराव — गावचे दुकान.':'By Ravindra & Rupam Anerao.';setNavBrand()}
 
-function appS(){const s=gS();const wa='https://wa.me/'+(s.whatsapp||'918208674432');document.querySelectorAll('#navW,#hWa,#ctaW,#floatWa,#mmWa,#pbCta').forEach(el=>{if(el)el.href=wa});const ph='tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'');document.getElementById('ctaP').href=ph;const mmPh=document.getElementById('mmPh');if(mmPh)mmPh.href=ph;if(s.showKonkan===false)document.getElementById('kSec').style.display='none'}
+function appS(){document.querySelectorAll('#navW,#hWa,#ctaW,#floatWa,#mmWa,#pbCta').forEach(el=>{if(el)el.href=WA_GROUP});const s=gS();const ph='tel:'+(s.phone||'+91 8208674432').replace(/\s/g,'');document.getElementById('ctaP').href=ph;const mmPh=document.getElementById('mmPh');if(mmPh)mmPh.href=ph;if(s.showKonkan===false)document.getElementById('kSec').style.display='none'}
 
 function waE(nm,ev){const s=gS();const msg=lang==='mr'?'नमस्कार! मला या प्रॉडक्टबद्दल विचारायचे आहे: '+nm:'Hi! I want to enquire about: '+nm;window.open('https://wa.me/'+(s.whatsapp||'918208674432')+'?text='+encodeURIComponent(msg),'_blank')}
 
@@ -1028,7 +1052,7 @@ function refreshData(){appS();rH();rMq();rN();rCat();rP();rA();rF();chkOpen();up
 window.addEventListener('storage',e=>{if(e.key&&e.key.indexOf('shubharambh')===0)refreshData()});
 
 async function loadSiteData(){
-  const base=(typeof window.SITE_DATA_URL==='string'&&window.SITE_DATA_URL.trim())?window.SITE_DATA_URL.trim():'site-data.json';
+  const base=(typeof window.SITE_DATA_URL==='string'&&window.SITE_DATA_URL.trim())?window.SITE_DATA_URL.trim():'shubharambh_2026-03-27.json';
   try{
     const sep=base.indexOf('?')>=0?'&':'?';
     const r=await fetch(base+sep+'t='+Date.now(),{cache:'no-store'});
