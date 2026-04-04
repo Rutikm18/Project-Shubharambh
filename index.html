@@ -145,7 +145,7 @@ nav:not(.sc) .ham span{background:white}
 .sn:hover{background:var(--g);color:var(--w);border-color:var(--g);transform:translateY(-50%) scale(1.08)}
 .sn.pv{left:-14px}.sn.nx{right:-14px}
 .st{overflow:hidden;padding:.5rem 0 1rem}
-.si{display:flex;gap:.9rem;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+.si{display:flex;gap:.9rem;align-items:stretch;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
 
 /* Product Card */
 .pc{min-width:210px;flex-shrink:0;background:var(--w);border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.04);transition:transform .35s,box-shadow .35s;cursor:default;position:relative;box-shadow:var(--sh)}
@@ -282,7 +282,7 @@ nav:not(.sc) .ham span{background:white}
 .owner-wrap{display:grid;grid-template-columns:1fr 1.35fr;gap:3rem;align-items:center;max-width:880px;margin:0 auto}
 .owner-img-col{position:relative;text-align:center}
 .owner-img{width:290px;height:350px;object-fit:cover;border-radius:24px;display:block;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.11),0 0 0 4px var(--w),0 0 0 8px var(--gp);transition:transform .4s}
-.owner-img:hover{transform:scale(1.025) rotate(.8deg)}
+.owner-img:hover{transform:scale(1.04);box-shadow:0 24px 70px rgba(0,0,0,.16),0 0 0 4px var(--w),0 0 0 8px var(--gp)}
 .owner-badge{position:absolute;bottom:.8rem;left:50%;transform:translateX(-50%);background:var(--gd);color:var(--ml);padding:.38rem 1.2rem;border-radius:50px;font-size:.9rem;font-weight:700;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.18)}
 .owner-leaf{position:absolute;top:-1rem;right:0;font-size:2.8rem;opacity:.5;animation:leafspin 12s linear infinite}
 @keyframes leafspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
@@ -327,6 +327,15 @@ footer{background:var(--d);color:var(--w);padding:3rem 5% 1.2rem}
 
 @keyframes fi{from{opacity:0}to{opacity:1}}
 @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* Image Lightbox */
+.pc .pi{cursor:zoom-in}
+.owner-img{cursor:zoom-in}
+#imgLb{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.88);align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fi .18s ease}
+#imgLb img{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 24px 80px rgba(0,0,0,.5);object-fit:contain;pointer-events:none;animation:lbPop .22s cubic-bezier(.34,1.56,.64,1)}
+@keyframes lbPop{from{transform:scale(.82);opacity:0}to{transform:scale(1);opacity:1}}
+#imgLbCls{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.13);border:1.5px solid rgba(255,255,255,.18);color:#fff;width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s;pointer-events:all}
+#imgLbCls:hover{background:rgba(255,255,255,.25);transform:scale(1.08)}
 
 
 /* Product Search */
@@ -447,17 +456,18 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 .si-dot{width:7px;height:7px;border-radius:50%;background:var(--l);border:none;cursor:pointer;transition:all .28s cubic-bezier(.34,1.56,.64,1);padding:0;flex-shrink:0}
 .si-dot.ac{background:var(--m);width:20px;border-radius:4px}
 
-/* New Arrivals slider — viewport-relative card + image sizing for consistent 4:3 ratio */
-.nsec .si .pc{min-width:210px}
-.nsec .si .pc .pi{height:158px}
-.nsec .si .pc .pi img{position:absolute;inset:0;z-index:0;width:100%;height:100%;max-width:none;max-height:none;object-fit:cover;object-position:center;display:block}
+/* New Arrivals slider */
+.nsec .si .pc{flex:0 0 200px;width:200px;min-width:0;display:flex;flex-direction:column}
+.nsec .si .pc .pb{flex:1}
+.nsec .si .pc .pi{height:150px;position:relative;overflow:hidden;background:var(--l)}
+.nsec .si .pc .pi img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;max-width:none;max-height:none}
 /* WA button glow — applies when main buttons link to group */
 .bwa{animation:waGlow 2.6s ease-in-out infinite}
 
 /* ── 1024px ─────────────── */
 @media(max-width:1024px){
-  .nsec .si .pc{min-width:195px}
-  .nsec .si .pc .pi{height:146px}
+  .nsec .si .pc{flex:0 0 185px;width:185px;min-width:0}
+  .nsec .si .pc .pi{height:138px}
   .kb{grid-template-columns:1fr;padding:2rem 1.5rem;margin:0 4%}.kga{margin-top:1rem}
   .ft{grid-template-columns:1fr 1fr}
   .owner-wrap{grid-template-columns:1fr;text-align:center;gap:2rem}
@@ -466,7 +476,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 768px ─────────────── */
 @media(max-width:768px){
-  .nsec .si .pc{min-width:58vw}.nsec .si .pc .pi{height:38vw}
+  .nsec .si .pc{flex:0 0 58vw;width:58vw;min-width:0}.nsec .si .pc .pi{height:42vw}
   .nl .nn{max-width:min(100%,calc(100vw - 188px));gap:.1rem;padding-left:.48rem}
   .nl .nn::before{top:.15rem;bottom:.15rem;width:2.5px}
   .nl .nn-brand{font-size:.88rem}
@@ -502,7 +512,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 600px ─────────────── */
 @media(max-width:600px){
-  .nsec .si .pc{min-width:68vw}.nsec .si .pc .pi{height:44vw}
+  .nsec .si .pc{flex:0 0 66vw;width:66vw;min-width:0}.nsec .si .pc .pi{height:50vw}
   /* Product banner: more image area + readable overlay (was short fixed height) */
   .pbanner{margin-left:-5%;margin-right:-5%;width:calc(100% + 10%);border-radius:16px}
   .pbanner-ov{
@@ -548,7 +558,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
 
 /* ── 480px ─────────────── */
 @media(max-width:480px){
-  .nsec .si .pc{min-width:72vw}.nsec .si .pc .pi{height:46vw}
+  .nsec .si .pc{flex:0 0 76vw;width:76vw;min-width:0}.nsec .si .pc .pi{height:57vw}
   nav{padding:0 4.5%;height:57px}
   .nav-logo{width:50px;height:50px;border-radius:13px}
   .nl .nn{max-width:min(100%,calc(100vw - 168px));gap:.08rem;padding-left:.42rem}
@@ -874,6 +884,7 @@ nav:not(.sc) .nk a::after{background:rgba(255,255,255,.55)}
   <span class="fwa-lbl" id="fwaLbl">WhatsApp</span>
 </a>
 <button class="sctop" id="scTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div id="imgLb"><img id="imgLbImg" src="" alt=""><button id="imgLbCls" aria-label="Close">✕</button></div>
 
 <script>
 const PK='shubharambh_products',SK='shubharambh_settings',CK='shubharambh_categories',TK='shubharambh_tags',COK='shubharambh_content';
@@ -899,15 +910,16 @@ function setL(l){lang=l;document.body.classList.toggle('en',l==='en');document.q
 function rH(){const co=gCO(),s=gS();document.getElementById('hTitle').innerHTML=lang==='mr'?(co.cHM||'आपल्या गावातील <span class="hl">हक्काचं आणि विश्वासाचं</span> ठिकाण'):(co.cHE||'Your Trusted <span class="hl">Village</span> Store');document.getElementById('hSub').textContent=lang==='mr'?(co.cSM||'किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, सणाच्या वस्तू, लोणचे, सुकामेवा — सर्व एकाच ठिकाणी'):(co.cSE||'Groceries, cold drinks, ice cream, snacks, festival items, pickles, dry fruits — all under one roof');if(s.timings)document.getElementById('hBdg').setAttribute('data-mr',s.timings+' उघडे');document.querySelector('.hero')?.classList.add('hero-ui-ready')}
 
 function mkPrice(p,showPr){if(!showPr)return'<span></span>';const sell=p.sellingPrice!==''&&p.sellingPrice!=null?parseFloat(p.sellingPrice):NaN;const orig=p.originalPrice!==''&&p.originalPrice!=null?parseFloat(p.originalPrice):NaN;const hasSell=!isNaN(sell)&&sell>0;const hasOrig=!isNaN(orig)&&orig>0;if(!hasSell&&!hasOrig)return'<span></span>';if(hasOrig&&hasSell){if(orig>sell){const pct=Math.round((orig-sell)/orig*100);return'<div class="pp"><div class="pp-row"><span class="pp-now">₹'+sell+'</span><span class="pp-old">₹'+orig+'</span><span class="pp-dis">'+pct+'% OFF</span></div></div>'}return'<span class="pp">₹'+orig+'</span>'}return'<span class="pp">₹'+(hasOrig?orig:sell)+'</span>'}
-function mkC(p,nw){const ts=gT(),st=gS(),sp=st.showPrices!==false;const tg=ts.find(t=>t.id===p.tag);const nm=lang==='en'&&p.nameEn?p.nameEn:p.name;const ds=lang==='en'&&p.descriptionEn?p.descriptionEn:p.description;const img=p.image?'<img src="'+p.image+'" loading="lazy">':'<div class="noi">📷</div>';const th=tg?'<span class="pt" style="background:'+tg.color+'">'+(lang==='en'?tg.nameEn:tg.name)+'</span>':'';const nb=(p.tag==='new')?'<span class="nb">✨ '+(lang==='mr'?'नवीन':'NEW')+'</span>':'';const pr=mkPrice(p,sp);const waTxt=lang==='mr'?'विचारा':'Ask';const uqClass=p.isUnique?' pc-unique':'';const uqBadge=p.isUnique?'<span class="uniq-badge">✦ '+(lang==='mr'?'विशेष':'Unique')+'</span>':'';const catClass=' pc-cat-'+(p.category||'daily');return '<div class="pc rv pc-new-arrival'+catClass+uqClass+'"><div class="pc-glare"></div><div class="pi">'+img+th+nb+'</div><div class="pb"><h4>'+nm+uqBadge+'</h4>'+(ds?'<p class="ps">'+ds+'</p>':'')+'<div class="pf">'+pr+'<button class="pwi rpl" onclick="waE(\''+nm.replace(/'/g,"\\'")+'\',event)" title="'+waTxt+' on WhatsApp" style="min-width:72px;border-radius:50px;font-size:.78rem;font-weight:700;gap:.3rem;padding:0 .7rem"><span>💬</span><span>'+waTxt+'</span></button></div></div></div>'}
+function mkC(p,nw){const ts=gT(),st=gS(),sp=st.showPrices!==false;const tg=ts.find(t=>t.id===p.tag);const nm=lang==='en'&&p.nameEn?p.nameEn:p.name;const ds=lang==='en'&&p.descriptionEn?p.descriptionEn:p.description;const img=p.image?'<img src="'+p.image+'" loading="lazy">':'<div class="noi">📷</div>';const th=tg?'<span class="pt" style="background:'+tg.color+'">'+(lang==='en'?tg.nameEn:tg.name)+'</span>':'';const nb=(p.tag==='new'&&!tg)?'<span class="nb">✨ '+(lang==='mr'?'नवीन':'NEW')+'</span>':'';const pr=mkPrice(p,sp);const waTxt=lang==='mr'?'विचारा':'Ask';const uqClass=p.isUnique?' pc-unique':'';const uqBadge=p.isUnique?'<span class="uniq-badge">✦ '+(lang==='mr'?'विशेष':'Unique')+'</span>':'';const catClass=' pc-cat-'+(p.category||'daily');return '<div class="pc rv pc-new-arrival'+catClass+uqClass+'"><div class="pc-glare"></div><div class="pi">'+img+th+nb+'</div><div class="pb"><h4>'+nm+uqBadge+'</h4>'+(ds?'<p class="ps">'+ds+'</p>':'')+'<div class="pf">'+pr+'<button class="pwi rpl" onclick="waE(\''+nm.replace(/'/g,"\\'")+'\',event)" title="'+waTxt+' on WhatsApp" style="min-width:72px;border-radius:50px;font-size:.78rem;font-weight:700;gap:.3rem;padding:0 .7rem"><span>💬</span><span>'+waTxt+'</span></button></div></div></div>'}
 
 function mkDots(count){const dc=document.getElementById('siDots');if(!dc)return;dc.innerHTML='';for(let i=0;i<count;i++){const b=document.createElement('button');b.className='si-dot'+(i===0?' ac':'');b.onclick=()=>goSlide(i);dc.appendChild(b)}}
 function updDots(idx){document.querySelectorAll('.si-dot').forEach((d,i)=>d.classList.toggle('ac',i===idx))}
-function goSlide(idx){const t=document.getElementById('nSl');const cw=(t.querySelector('.pc')?.offsetWidth||200)+12;nP=-idx*cw;const mx=-(t.scrollWidth-t.parentElement.offsetWidth);nP=Math.min(0,Math.max(nP,mx));t.style.transform='translateX('+nP+'px)';updDots(Math.round(Math.abs(nP)/(cw||1)))}
+function slGap(t){const s=t?parseFloat(getComputedStyle(t).gap)||14:14;return s}
+function goSlide(idx){const t=document.getElementById('nSl');const cw=(t.querySelector('.pc')?.offsetWidth||200)+slGap(t);nP=-idx*cw;const mx=-(t.scrollWidth-t.parentElement.offsetWidth);nP=Math.min(0,Math.max(nP,mx));t.style.transform='translateX('+nP+'px)';updDots(Math.round(Math.abs(nP)/(cw||1)))}
 
 function rN(){const pr=gP().filter(p=>p.tag==='new').sort((a,b)=>new Date(b.addedAt||0)-new Date(a.addedAt||0)),s=gS(),sec=document.getElementById('nSec');if(!pr.length||s.showNew===false){sec.style.display='none';return}sec.style.display='';document.getElementById('nSl').innerHTML=pr.map(p=>mkC(p,true)).join('');nP=0;document.getElementById('nSl').style.transform='translateX(0)';mkDots(pr.length);setTimeout(init3DTilt,80)}
-let nP=0;function slN(d){const t=document.getElementById('nSl'),cw=(t.querySelector('.pc')?.offsetWidth||210)+12,mx=-(t.scrollWidth-t.parentElement.offsetWidth);nP=Math.min(0,Math.max(nP+(d*-cw),mx));t.style.transform='translateX('+nP+'px)';updDots(Math.round(Math.abs(nP)/cw))}
-function iT(el){let sx,sl;el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sl=nP},{passive:true});el.addEventListener('touchmove',e=>{const dx=e.touches[0].clientX-sx,mx=-(el.scrollWidth-el.parentElement.offsetWidth);nP=Math.min(0,Math.max(sl+dx,mx));el.style.transform='translateX('+nP+'px)'},{passive:true});el.addEventListener('touchend',()=>{const cw=(el.querySelector('.pc')?.offsetWidth||200)+12;updDots(Math.round(Math.abs(nP)/(cw||1)))},{passive:true})}
+let nP=0;function slN(d){const t=document.getElementById('nSl'),cw=(t.querySelector('.pc')?.offsetWidth||200)+slGap(t),mx=-(t.scrollWidth-t.parentElement.offsetWidth);nP=Math.min(0,Math.max(nP+(d*-cw),mx));t.style.transform='translateX('+nP+'px)';updDots(Math.round(Math.abs(nP)/cw))}
+function iT(el){let sx,sl;el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sl=nP},{passive:true});el.addEventListener('touchmove',e=>{const dx=e.touches[0].clientX-sx,mx=-(el.scrollWidth-el.parentElement.offsetWidth);nP=Math.min(0,Math.max(sl+dx,mx));el.style.transform='translateX('+nP+'px)'},{passive:true});el.addEventListener('touchend',()=>{const cw=(el.querySelector('.pc')?.offsetWidth||200)+slGap(el);updDots(Math.round(Math.abs(nP)/(cw||1)))},{passive:true})}
 
 function rCat(){const cs=gC();document.getElementById('catG').innerHTML=cs.map(c=>'<a class="cc rv" href="#products" onclick="fTo(\''+c.id+'\')"><div class="ci">'+c.icon+'</div><h4>'+(lang==='en'?c.nameEn:c.name)+'</h4></a>').join('')}
 
@@ -1067,6 +1079,25 @@ async function loadSiteData(){
   }catch(e){}
 }
 
+function initImgLightbox(){
+  const ov=document.getElementById('imgLb');
+  const img=document.getElementById('imgLbImg');
+  const cls=document.getElementById('imgLbCls');
+  if(!ov||!img||!cls)return;
+  function open(src){img.src=src;ov.style.display='flex';document.body.style.overflow='hidden'}
+  function close(){ov.style.display='none';img.src='';document.body.style.overflow=''}
+  ov.addEventListener('click',e=>{if(e.target===ov)close()});
+  cls.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ov.style.display==='flex')close()});
+  document.addEventListener('click',e=>{
+    if(e.target.classList.contains('owner-img')&&e.target.src){open(e.target.src);return}
+    const pi=e.target.closest('.pc .pi');
+    if(!pi)return;
+    const i=pi.querySelector('img');
+    if(i&&i.src&&!i.src.endsWith('#'))open(i.src);
+  });
+}
+
 function init(){
   appS();rH();rMq();rN();rCat();rP();rA();rF();chkOpen();
   document.querySelectorAll('.rv,.wc').forEach(el=>obs.observe(el));
@@ -1077,6 +1108,7 @@ function init(){
   initParticles();
   initScrollProgress();
   initRipple();
+  initImgLightbox();
   window.addEventListener('scroll',()=>{
     updateNavTheme();
     document.getElementById('scTop').classList.toggle('show',scrollY>350);
