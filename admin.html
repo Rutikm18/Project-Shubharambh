@@ -81,9 +81,42 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns=
 .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--d);color:var(--w);padding:.7rem 1rem;border-radius:10px;font-size:.78rem;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.15);transform:translateY(70px);opacity:0;transition:.3s;z-index:300}
 .toast.show{transform:translateY(0);opacity:1}
 @media(max-width:800px){.side{display:none}.main{margin-left:0}.stats{grid-template-columns:1fr 1fr}.fr{grid-template-columns:1fr}}
+
+/* Auth Wall */
+#authWall{position:fixed;inset:0;z-index:9999;background:linear-gradient(135deg,#0F4A1C,#1B6B2A);display:flex;align-items:center;justify-content:center;padding:1.5rem}
+#authWall.gone{display:none}
+.aw-box{background:#fff;border-radius:20px;padding:2.4rem 2rem;width:100%;max-width:360px;box-shadow:0 24px 64px rgba(0,0,0,.25);animation:mIn .25s ease}
+.aw-logo{width:72px;height:72px;border-radius:16px;object-fit:cover;display:block;margin:0 auto 1rem}
+.aw-title{text-align:center;font-size:1.1rem;font-weight:800;color:var(--d);margin-bottom:.25rem}
+.aw-sub{text-align:center;font-size:.75rem;color:var(--gr);margin-bottom:1.6rem}
+.aw-inp-wrap{position:relative;width:100%}
+.aw-inp{width:100%;padding:.7rem 2.6rem .7rem 1rem;border:2px solid var(--l);border-radius:10px;font-size:.9rem;font-family:inherit;color:var(--d);outline:none;transition:border .2s;letter-spacing:.06em}
+.aw-inp:focus{border-color:var(--g)}
+.aw-inp.err{border-color:#DC2626;animation:shake .35s}
+.aw-eye{position:absolute;right:.7rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gr);padding:.2rem;line-height:1;transition:color .2s}
+.aw-eye:hover{color:var(--d)}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.aw-btn{width:100%;margin-top:.9rem;padding:.75rem;background:var(--g);color:#fff;border:none;border-radius:10px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s,transform .15s}
+.aw-btn:hover{background:#0F4A1C;transform:translateY(-1px)}
+.aw-err{text-align:center;font-size:.73rem;color:#DC2626;margin-top:.6rem;min-height:1rem}
+.aw-btn.ok{background:#16A34A;pointer-events:none}
+.aw-btn.fail{background:#DC2626;pointer-events:none}
 </style>
 </head>
 <body>
+<div id="authWall">
+  <div class="aw-box">
+    <img src="Shop logo.jpeg" class="aw-logo" alt="Logo">
+    <div class="aw-title">शुभारंभ Admin</div>
+    <div class="aw-sub">प्रवेशासाठी Secret Key टाका</div>
+    <div class="aw-inp-wrap">
+      <input type="password" id="awKey" class="aw-inp" placeholder="Secret Key" autocomplete="off" onkeydown="if(event.key==='Enter')awLogin()">
+      <button class="aw-eye" id="awEye" type="button" onclick="awToggleEye()" title="Show/Hide">👁</button>
+    </div>
+    <button class="aw-btn" onclick="awLogin()">🔓 प्रवेश करा</button>
+    <div class="aw-err" id="awErr"></div>
+  </div>
+</div>
 <aside class="side">
   <div class="logo">🏪 <div><b>शुभारंभ</b><small>Admin Dashboard</small></div></div>
   <h6>व्यवस्थापन</h6>
@@ -107,7 +140,7 @@ select.fi{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns=
   </div>
   <div id="V_tags" style="display:none"><div class="sp"><h3>🏷️ टॅग्स व्यवस्थापन</h3><div class="infobox"><b>"नवीन"</b> टॅग लावलेले प्रॉडक्ट्स वेबसाईटवर "नवीन आलेले" स्लायडरमध्ये दिसतात!</div><div id="tagL" style="display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem"></div><div style="display:flex;gap:.5rem"><input class="fi" id="ntN" placeholder="टॅग नाव" style="flex:1"><input class="fi" id="ntC" value="#1B6B2A" style="width:80px"><button class="btn btn-p" onclick="addTag()">जोडा</button></div></div></div>
   <div id="V_cats" style="display:none"><div class="sp"><h3>📂 श्रेण्या</h3><div id="catL"></div><div style="display:flex;gap:.5rem;margin-top:1rem"><input class="fi" id="ncN" placeholder="मराठी नाव" style="flex:1"><input class="fi" id="ncE" placeholder="English" style="flex:1"><input class="fi" id="ncI" placeholder="Emoji" style="width:55px" value="📦"><button class="btn btn-p" onclick="addCat()">जोडा</button></div></div></div>
-  <div id="V_content" style="display:none"><div class="sp"><h3>📝 मराठी</h3><div class="fg"><label>हीरो शीर्षक</label><input class="fi" id="c_hm" value="आपल्या गावातील हक्काचं आणि विश्वासाचं ठिकाण"></div><div class="fg"><label>वर्णन</label><textarea class="fi" id="c_dm" rows="2">किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, फरसाण, सणाच्या वस्तू, लोणचे, सुकामेवा, कोकणातील उत्पादने — सर्व एकाच ठिकाणी.</textarea></div><div class="fg"><label>आमच्याबद्दल</label><textarea class="fi" id="c_am" rows="8">श्री. रविंद्र अणेराव आणि श्रीमती रूपम अणेराव यांनी सन 2024 मध्ये ग्रामीण भागातील लोकांसाठी शुभारंभ स्टोअर्स अँड कोल्ड ड्रिंक्स सुरू केले. आमच्या दुकानात दैनंदिन जीवनासाठी लागणाऱ्या वस्तू, स्नॅक्स आणि ताजे थंड पेये मिळतात. आम्ही नेहमी ग्राहकांना उत्तम दर्जाचे उत्पादने परवडणाऱ्या किमतीत देण्याचा प्रयत्न करतो. ग्रामीण भागातील ग्राहकांसाठी सोयीस्कर सेवा, ताजेतवाने थंड पेये आणि घरगुती वापराच्या वस्तू – हेच आमचे मुख्य ध्येय आहे.
+  <div id="V_content" style="display:none"><div class="sp"><h3>📝 मराठी</h3><div class="fg"><label>हीरो शीर्षक</label><input class="fi" id="c_hm" value="आपल्या गावातील हक्काचं आणि विश्वासाचं ठिकाण"></div><div class="fg"><label>वर्णन</label><textarea class="fi" id="c_dm" rows="2">किराणा, थंड पेये, आइस्क्रीम, स्नॅक्स, फरसाण, सणाच्या वस्तू, लोणचे, सुकामेवा, कोकणातील उत्पादने — सर्व एकाच ठिकाणी.</textarea></div><div class="fg"><label>आमच्याबद्दल</label><textarea class="fi" id="c_am" rows="8">श्री. रविंद्र अणेराव आणि सौ. रूपम अणेराव यांनी सन 2024 मध्ये ग्रामीण भागातील लोकांसाठी शुभारंभ स्टोअर अँड कोल्ड्रिंक्स सुरू केले. आमच्या दुकानात दैनंदिन जीवनासाठी लागणाऱ्या वस्तू, स्नॅक्स आणि ताजे थंड पेये मिळतात. आम्ही नेहमी ग्राहकांना उत्तम दर्जाचे उत्पादने परवडणाऱ्या किमतीत देण्याचा प्रयत्न करतो. ग्रामीण भागातील ग्राहकांसाठी सोयीस्कर सेवा, ताजेतवाने थंड पेये आणि घरगुती वापराच्या वस्तू – हेच आमचे मुख्य ध्येय आहे.
 
 आमच्या दुकानात उपलब्ध असणारी उत्पादने, जसे की आंबा, फणस, कोकण सरबत, गोड कोकम, आंबा रस, आवळा सरबत तसेच कुळीद पीठ, डांगर पीठ मुख्यतः कोकणातील विविध घरगुती उद्योगांमधून येतात. आमचे ध्येय आहे की गावातील ग्राहकांना बाहेरून येणाऱ्या लोकांसाठी देखील गुणवत्तापूर्ण, नैसर्गिक पद्धतीने तयार केलेली उत्पादने सहज उपलब्ध व्हावीत, त्यामुळे त्यांना बाहेर जाऊन शोधण्याची गरज पडू नये.</textarea></div></div><div class="sp"><h3>📝 English</h3><div class="fg"><label>Hero Title</label><input class="fi" id="c_he" value="Your Trusted Village Store"></div><div class="fg"><label>Description</label><textarea class="fi" id="c_de" rows="2">Groceries, cold drinks, ice cream, snacks, farsan, festival items, pickles, dry fruits & Konkan products — all under one roof.</textarea></div><div class="fg"><label>About</label><textarea class="fi" id="c_ae" rows="8">Mr. Ravindra Anerao and Mrs. Roopam Anerao started Shubharambh Stores &amp; Cold Drinks in 2024 to serve people in rural areas. Our shop offers everyday essential items, snacks, and fresh cold beverages. We always strive to provide customers with high-quality products at affordable prices.
 
@@ -116,12 +149,51 @@ Convenient service for rural customers, refreshing cold drinks, and household ne
 The products available in our shop—such as mangoes, jackfruit, Kokum-based drinks (Kokum sharbat and sweet Kokum), mango pulp, amla (gooseberry) sharbat, as well as Kulith flour and Dangar flour—mainly come from various home-based industries in the Konkan region.
 
 Our aim is to make high-quality, naturally prepared products easily available to village customers as well as visitors from outside, so they do not have to go elsewhere in search of them.</textarea></div></div><button class="btn btn-p" onclick="saveCo()">💾 सेव्ह</button></div>
-  <div id="V_settings" style="display:none"><div class="sp"><h3>🏪 दुकान माहिती</h3><div class="fg"><label>नाव (मराठी)</label><input class="fi" id="s_nm" value="शुभारंभ स्टोअर अँड कोल्ड्रिंक्स"></div><div class="fg"><label>Name (En)</label><input class="fi" id="s_ne" value="Shubharambh Stores"></div><div class="fr"><div class="fg"><label>WhatsApp</label><input class="fi" id="s_wa" value="918208674432"></div><div class="fg"><label>Phone</label><input class="fi" id="s_ph" value="+91 8208674432"></div></div><div class="fr"><div class="fg"><label>पत्ता (मराठी)</label><input class="fi" id="s_adm" value="तुमचे गाव,आंगवली"></div><div class="fg"><label>Address</label><input class="fi" id="s_ade" value="Your Village, Angavali"></div></div><div class="fg"><label>वेळ</label><input class="fi" id="s_ti" value="सकाळी 8 ते रात्री 8.30"></div><button class="btn btn-p" onclick="saveSet()">💾 सेव्ह</button></div><div class="sp"><h3>🎨 Display</h3><div class="sr"><div><h4>किंमत दाखवा</h4></div><div class="tog on" id="t_pr" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>"नवीन" स्लायडर</h4></div><div class="tog on" id="t_nw" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>कोकण सेक्शन</h4></div><div class="tog on" id="t_ko" onclick="this.classList.toggle('on')"></div></div></div></div>
+  <div id="V_settings" style="display:none"><div class="sp"><h3>🏪 दुकान माहिती</h3><div class="fg"><label>नाव (मराठी)</label><input class="fi" id="s_nm" value="शुभारंभ स्टोअर अँड कोल्ड्रिंक्स"></div><div class="fg"><label>Name (En)</label><input class="fi" id="s_ne" value="Shubharambh Stores"></div><div class="fr"><div class="fg"><label>WhatsApp</label><input class="fi" id="s_wa" value="918208674432"></div><div class="fg"><label>Phone</label><input class="fi" id="s_ph" value="+91 8208674432"></div></div><div class="fr"><div class="fg"><label>पत्ता (मराठी)</label><input class="fi" id="s_adm" value="तुमचे गाव,आंगवली"></div><div class="fg"><label>Address</label><input class="fi" id="s_ade" value="Your Village, Angavali"></div></div><div class="fg"><label>वेळ</label><input class="fi" id="s_ti" value="सकाळी 8 ते रात्री 8.30"></div><button class="btn btn-p" onclick="saveSet()">💾 सेव्ह</button></div><div class="sp"><h3>🎨 Display</h3><div class="sr"><div><h4>किंमत दाखवा</h4></div><div class="tog on" id="t_pr" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>"नवीन" स्लायडर</h4></div><div class="tog on" id="t_nw" onclick="this.classList.toggle('on')"></div></div><div class="sr"><div><h4>कोकण सेक्शन</h4></div><div class="tog on" id="t_ko" onclick="this.classList.toggle('on')"></div></div></div></div></div>
 </div>
 <div class="mo" id="modal"><div class="mod"><div class="mod-h"><h2 id="mT">नवीन प्रॉडक्ट</h2><button class="mod-x" onclick="closeMod()">✕</button></div><div class="mod-b"><input type="hidden" id="eId"><div class="fg"><label>फोटो</label><div class="iu" id="iuA">📷<br><p><b>अपलोड करा</b> (2MB)</p><input type="file" accept="image/*" id="iF" onchange="hImg(event)"></div><img class="ip" id="iPr"><div class="urlt">किंवा <a onclick="tgIm()">URL paste करा</a></div><div id="iuF" style="display:none"><input class="fi" id="iUrl" placeholder="https://..." oninput="pUrl()"></div></div><div class="fg"><label>नाव (मराठी) <em>*</em></label><input class="fi" id="pN" placeholder="कोकम आगळ"></div><div class="fg"><label>Name (English)</label><input class="fi" id="pNe" placeholder="Kokam Agal"></div><div class="fr"><div class="fg"><label>श्रेणी</label><select class="fi" id="pC"></select></div><div class="fg"><label>टॅग</label><select class="fi" id="pT"></select></div></div><div class="fr"><div class="fg"><label>Selling ₹ <small style="color:var(--gr)">(विक्री किंमत)</small></label><input class="fi" id="pP" type="number" placeholder="जी किंमत आकारता"></div><div class="fg"><label>Original ₹ <small style="color:var(--gr)">(MRP)</small></label><input class="fi" id="pO" type="number" placeholder="मूळ / MRP किंमत"></div></div><div class="fg" style="display:flex;align-items:center;gap:.5rem;background:#FFFBEB;padding:.6rem .8rem;border-radius:8px;border:1.5px solid #FDE68A"><input type="checkbox" id="pU" style="width:16px;height:16px;accent-color:#F59E0B;flex-shrink:0"><label style="font-size:.8rem;font-weight:600;cursor:pointer;line-height:1.3" for="pU">✦ विशेष / Unique Item <small style="color:var(--gr);font-weight:400;display:block">दुर्मिळ, खास किंवा एकमेव वस्तू — वेगळ्या पद्धतीने दाखवली जाते</small></label></div><div class="fg"><label>वर्णन (मराठी)</label><input class="fi" id="pD"></div><div class="fg"><label>Desc (En)</label><input class="fi" id="pDe"></div></div><div class="mod-f"><button class="btn btn-o" onclick="closeMod()">रद्द</button><button class="btn btn-p" onclick="saveP()">💾 सेव्ह</button></div></div></div>
 <div class="toast" id="tst"></div>
 <input type="file" id="impF" accept=".json" style="display:none" onchange="imp(event)">
 <script>
+/* ── Authentication ── */
+const AW_KEY='sb_admin_auth';
+const AW_EK='NUFmbjJZdElhWHltbWpna01iWnI1UFdGTEZVPQ==';
+function awVerify(v){try{return btoa(v)===AW_EK}catch(e){return false}}
+function awToggleEye(){const i=document.getElementById('awKey');const b=document.getElementById('awEye');const show=i.type==='password';i.type=show?'text':'password';b.textContent=show?'🙈':'👁';i.focus()}
+function awLogin(){
+  const inp=document.getElementById('awKey');
+  const err=document.getElementById('awErr');
+  const btn=document.querySelector('.aw-btn');
+  const v=inp.value.trim();
+  if(!v){inp.classList.add('err');setTimeout(()=>inp.classList.remove('err'),400);return}
+  if(awVerify(v)){
+    sessionStorage.setItem(AW_KEY,'1');
+
+    document.getElementById('authWall').classList.add('gone');
+    view('prod',document.querySelector('.si'));
+  }else{
+    btn.textContent='❌ चुकीची Key!';
+    btn.classList.add('fail');
+    err.textContent='Key चुकीची आहे — पुन्हा प्रयत्न करा';
+    inp.classList.add('err');
+    inp.value='';
+    inp.focus();
+    setTimeout(()=>{
+      btn.textContent='🔓 प्रवेश करा';
+      btn.classList.remove('fail');
+      inp.classList.remove('err');
+      err.textContent='';
+      err.style.color='';
+    },2000);
+  }
+}
+/* awCheck runs after all JS is defined (script at bottom of body) */
+function awCheck(){
+  if(sessionStorage.getItem(AW_KEY)!=='1')return;
+  document.getElementById('authWall').classList.add('gone');
+}
+/* ────────────────── */
+
 const K={p:'shubharambh_products',s:'shubharambh_settings',c:'shubharambh_categories',t:'shubharambh_tags',co:'shubharambh_content'};
 const DC=[{id:'snacks',n:'स्नॅक्स व फरसाण',e:'Snacks & Farsan',i:'🍘'},{id:'drinks',n:'थंड पेये व आइस्क्रीम',e:'Drinks & Ice Cream',i:'🥤'},{id:'konkan',n:'कोकण स्पेशल',e:'Konkan Special',i:'🌿'},{id:'festival',n:'सण-उत्सव',e:'Festival Items',i:'🎉'},{id:'daily',n:'दैनंदिन वस्तू',e:'Daily Essentials',i:'🛒'}];
 const DT=[{id:'new',n:'नवीन',e:'New',c:'#9B1B30'},{id:'best',n:'बेस्टसेलर',e:'Bestseller',c:'#F59E0B'},{id:'popular',n:'लोकप्रिय',e:'Popular',c:'#1B6B2A'},{id:'offer',n:'ऑफर',e:'Offer',c:'#DC2626'},{id:'homemade',n:'घरगुती',e:'Homemade',c:'#0F4A1C'}];
@@ -148,12 +220,14 @@ function addCat(){const n=document.getElementById('ncN').value.trim();if(!n)retu
 function rmCat(i){const c=gC();c.splice(i,1);sv(K.c,c);rCats()}
 function lCo(){const co=gCo();['c_hm','c_dm','c_am','c_he','c_de','c_ae'].forEach(k=>{if(co[k])document.getElementById(k).value=co[k]})}
 function saveCo(){const co={};['c_hm','c_dm','c_am','c_he','c_de','c_ae'].forEach(k=>co[k]=document.getElementById(k).value);sv(K.co,co);toast('सेव्ह!','s')}
+function awLogout(){sessionStorage.removeItem(AW_KEY);location.reload()}
 function lSet(){const st=gS();if(st.nm)document.getElementById('s_nm').value=st.nm;if(st.ne)document.getElementById('s_ne').value=st.ne;if(st.wa)document.getElementById('s_wa').value=st.wa;if(st.ph)document.getElementById('s_ph').value=st.ph;if(st.adm)document.getElementById('s_adm').value=st.adm;if(st.ade)document.getElementById('s_ade').value=st.ade;if(st.ti)document.getElementById('s_ti').value=st.ti;if(st.sp===false)document.getElementById('t_pr').classList.remove('on');if(st.sn===false)document.getElementById('t_nw').classList.remove('on');if(st.sk===false)document.getElementById('t_ko').classList.remove('on')}
 function saveSet(){sv(K.s,{nm:document.getElementById('s_nm').value,ne:document.getElementById('s_ne').value,wa:document.getElementById('s_wa').value,ph:document.getElementById('s_ph').value,adm:document.getElementById('s_adm').value,ade:document.getElementById('s_ade').value,ti:document.getElementById('s_ti').value,sp:document.getElementById('t_pr').classList.contains('on'),sn:document.getElementById('t_nw').classList.contains('on'),sk:document.getElementById('t_ko').classList.contains('on')});toast('सेव्ह!','s')}
 function exp(){const d={_forceSync:true,products:gP(),settings:gS(),categories:gC(),tags:gT(),content:gCo()};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='shubharambh_'+new Date().toISOString().split('T')[0]+'.json';a.click();toast('Exported!','s')}
 function expSite(){const d={_forceSync:true,products:gP(),settings:gS(),categories:gC(),tags:gT(),content:gCo()};const b=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='site-data.json';a.click();toast('site-data.json — project folder मध्ये ठेवा व होस्टवर पुश/अपलोड करा','s')}
 function imp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=v=>{try{const d=JSON.parse(v.target.result);if(d.products)sv(K.p,d.products);if(d.settings)sv(K.s,d.settings);if(d.categories)sv(K.c,d.categories);if(d.tags)sv(K.t,d.tags);if(d.content)sv(K.co,d.content);rT();uS();toast('Imported!','s')}catch(e){toast('Error!','e')}};r.readAsText(f);e.target.value=''}
 function toast(m,t){const e=document.getElementById('tst');e.textContent=(t==='s'?'✅ ':'❌ ')+m;e.className='toast show';setTimeout(()=>e.classList.remove('show'),2500)}
+awCheck();
 rT();uS();
 </script>
 </body>
